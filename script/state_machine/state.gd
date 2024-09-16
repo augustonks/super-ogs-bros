@@ -9,19 +9,19 @@ func _ready() -> void:
 	_parent = get_parent() if not get_parent() is StateMachine else null
 
 
-func enter(params := []) -> void:
+func enter(_params := []) -> void:
 	pass
 
 
-func process(delta: float) -> void:
+func process(_delta: float) -> void:
 	pass
 
 
-func physics_process(delta: float) -> void:
+func physics_process(_delta: float) -> void:
 	pass
 
 
-func input(event: InputEvent) -> void:
+func input(_event: InputEvent) -> void:
 	pass
 
 

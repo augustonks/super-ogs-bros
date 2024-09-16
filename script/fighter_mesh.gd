@@ -1,8 +1,10 @@
 class_name FighterMesh
 extends Node3D
 
-@onready var animation_tree: AnimationTree = $AnimationTree
 @onready var _playback: AnimationNodeStateMachinePlayback = animation_tree["parameters/playback"]
+
+@export var animation_tree: AnimationTree
+@export var _tracker: AnimationPlayer
 
 enum animations {NONE, IDLE, WALK, JUMP, RUN, FALL, LANDHARD, PUNCH, KICK}
 
@@ -24,5 +26,6 @@ func transition_to(animation_id: int) -> void:
 			_playback.travel("LandHard")
 		animations.PUNCH:
 			_playback.travel("Punch")
+			_tracker.play("Punch")
 		animations.KICK:
 			_playback.travel("Kick")

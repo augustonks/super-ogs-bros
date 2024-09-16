@@ -1,6 +1,5 @@
 extends FighterState
 
 
-
 func enter(params := []) -> void:
-	pass
+	_mesh.transition_to(_mesh.animations.IDLE)

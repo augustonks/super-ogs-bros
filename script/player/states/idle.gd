@@ -1,7 +1,7 @@
 extends PlayerState
 
 
-func enter(params := []) -> void:
+func enter(_params := []) -> void:
 	_mesh.transition_to(_mesh.animations.IDLE)
 
 

@@ -8,7 +8,7 @@ const _JUMP_CANCEL_FACTOR: float = 0.7
 const FRICTION_CONSTANT: float = 60.0
 const JUMP_DELAY: float = 0.01
 
-func enter(params := []) -> void:
+func enter(_params := []) -> void:
 	if not _player.is_on_floor():
 		_remaining_jumps -= 1
 		return
@@ -24,7 +24,6 @@ func physics_process(delta: float) -> void:
 		if _previous_velocity_y < -14:
 			_state_machine.transition_to("Move/Land") 
 		else:
-			_player.velocity.x = 0
 			_state_machine.transition_to("Move/Idle") 
 	else:
 		_handle_animation()
