@@ -1,0 +1,53 @@
+[gd_scene load_steps=7 format=3 uid="uid://1eylassd1udl"]
+
+[ext_resource type="PackedScene" uid="uid://bii5x6qg7dh54" path="res://scene/player/player.tscn" id="1_vjm2x"]
+[ext_resource type="Script" path="res://script/camera/player_camera.gd" id="2_7nj4w"]
+[ext_resource type="PackedScene" uid="uid://w17yfnn1630m" path="res://scene/enemy/enemy.tscn" id="3_yih36"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6elbk"]
+
+[sub_resource type="Sky" id="Sky_ev3y3"]
+sky_material = SubResource("ProceduralSkyMaterial_6elbk")
+
+[sub_resource type="Environment" id="Environment_ltbvv"]
+background_mode = 2
+sky = SubResource("Sky_ev3y3")
+ssil_radius = 10.14
+ssil_intensity = 15.89
+sdfgi_use_occlusion = true
+fog_density = 0.0622
+fog_sky_affect = 0.0
+volumetric_fog_albedo = Color(0.181623, 0.344009, 0.950898, 1)
+adjustment_enabled = true
+adjustment_brightness = 1.07
+adjustment_saturation = 2.03
+
+[node name="Node3D" type="Node3D"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+use_collision = true
+size = Vector3(8, 1, 7)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 3, 4)
+
+[node name="Player" parent="." instance=ExtResource("1_vjm2x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0445174, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ltbvv")
+
+[node name="DirectionalLight3D3" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.66985, 0.43324, 0.602996, 0.0918328, -0.757543, 0.646293, 0.736796, 0.488294, 0.467655, 0.274683, 1.24981, 6.17366)
+light_color = Color(0.957352, 0.964569, 0.98567, 1)
+shadow_enabled = true
+
+[node name="Camera3D2" type="Camera3D" parent="." node_paths=PackedStringArray("_player")]
+transform = Transform3D(1, 0, 0, 0, 0.93986, 0.341561, 0, -0.341561, 0.93986, 0, 3.7165, 4)
+current = true
+script = ExtResource("2_7nj4w")
+_player = NodePath("../Player")
+
+[node name="Enemy" parent="." instance=ExtResource("3_yih36")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2.48382, 0, 0)

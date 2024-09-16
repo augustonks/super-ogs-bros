@@ -1,0 +1,245 @@
+[gd_scene load_steps=55 format=3 uid="uid://w17yfnn1630m"]
+
+[ext_resource type="Script" path="res://scene/enemy/fighter.gd" id="1_feo1k"]
+[ext_resource type="PackedScene" uid="uid://b34xyuw4ynwsx" path="res://assets/models/dummy/boneco-base-v2.glb" id="1_uiyes"]
+[ext_resource type="Script" path="res://script/player/player_model.gd" id="2_cxkrs"]
+[ext_resource type="PackedScene" uid="uid://c8a3vyya1lw0j" path="res://scene/component/hitbox.tscn" id="3_4s5p3"]
+[ext_resource type="Script" path="res://script/state_machine/state_machine.gd" id="4_35f2c"]
+[ext_resource type="PackedScene" uid="uid://ycfeugdymgyx" path="res://scene/component/hurtbox.tscn" id="5_nqwyv"]
+[ext_resource type="Script" path="res://scene/enemy/struk.gd" id="5_oa01s"]
+[ext_resource type="Script" path="res://script/enemy/fighter_state.gd" id="7_72t0e"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jqwhu"]
+size = Vector3(0.39, 1.5222, 0.26)
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_kyr1y"]
+animation = &"Fall"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xwch2"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_kcu2t"]
+animation = &"Jump"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_cqnep"]
+animation = &"Kick"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_nhan0"]
+animation = &"LandHard"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1ubig"]
+animation = &"Punch"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_l7c65"]
+animation = &"Run"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fovo2"]
+animation = &"Walk"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7cs6v"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xcoa8"]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bgn6n"]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ess55"]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fumfp"]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ha7a3"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6tswe"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0xpka"]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_i1byu"]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_23jpe"]
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4tukr"]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5q66t"]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ketpv"]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_il7yg"]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2pfal"]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hojv7"]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ni1gi"]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_y36mm"]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6a4v7"]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_axg8h"]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5mpb0"]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fa11h"]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_l6c8r"]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_amdah"]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4ettq"]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7abig"]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_okx1i"]
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_02ula"]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lp50d"]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nmlf0"]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_cdcaw"]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wc230"]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nj85d"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_07v4q"]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nsdyb"]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_coepq"]
+states/End/position = Vector2(1125, 108)
+states/Fall/node = SubResource("AnimationNodeAnimation_kyr1y")
+states/Fall/position = Vector2(592, 295.276)
+states/Idle/node = SubResource("AnimationNodeAnimation_xwch2")
+states/Idle/position = Vector2(632, 30)
+states/Jump/node = SubResource("AnimationNodeAnimation_kcu2t")
+states/Jump/position = Vector2(501, 131)
+states/Kick/node = SubResource("AnimationNodeAnimation_cqnep")
+states/Kick/position = Vector2(936, 76.2574)
+states/LandHard/node = SubResource("AnimationNodeAnimation_nhan0")
+states/LandHard/position = Vector2(832, 272.276)
+states/Punch/node = SubResource("AnimationNodeAnimation_1ubig")
+states/Punch/position = Vector2(866, 167.13)
+states/Run/node = SubResource("AnimationNodeAnimation_l7c65")
+states/Run/position = Vector2(326, 278)
+states/Start/position = Vector2(602, -103)
+states/Walk/node = SubResource("AnimationNodeAnimation_fovo2")
+states/Walk/position = Vector2(366, 100)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_7cs6v"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_xcoa8"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_bgn6n"), "Walk", "Run", SubResource("AnimationNodeStateMachineTransition_ess55"), "Run", "Walk", SubResource("AnimationNodeStateMachineTransition_fumfp"), "Walk", "Jump", SubResource("AnimationNodeStateMachineTransition_ha7a3"), "Jump", "Walk", SubResource("AnimationNodeStateMachineTransition_6tswe"), "Run", "Jump", SubResource("AnimationNodeStateMachineTransition_0xpka"), "Jump", "Run", SubResource("AnimationNodeStateMachineTransition_i1byu"), "Jump", "Fall", SubResource("AnimationNodeStateMachineTransition_23jpe"), "Fall", "Walk", SubResource("AnimationNodeStateMachineTransition_4tukr"), "Fall", "Run", SubResource("AnimationNodeStateMachineTransition_5q66t"), "Run", "Fall", SubResource("AnimationNodeStateMachineTransition_ketpv"), "Walk", "Fall", SubResource("AnimationNodeStateMachineTransition_il7yg"), "Idle", "Jump", SubResource("AnimationNodeStateMachineTransition_2pfal"), "Jump", "Idle", SubResource("AnimationNodeStateMachineTransition_hojv7"), "Idle", "Punch", SubResource("AnimationNodeStateMachineTransition_ni1gi"), "Punch", "Idle", SubResource("AnimationNodeStateMachineTransition_y36mm"), "Run", "Punch", SubResource("AnimationNodeStateMachineTransition_6a4v7"), "Punch", "Run", SubResource("AnimationNodeStateMachineTransition_axg8h"), "Walk", "Punch", SubResource("AnimationNodeStateMachineTransition_5mpb0"), "Punch", "Walk", SubResource("AnimationNodeStateMachineTransition_fa11h"), "Fall", "LandHard", SubResource("AnimationNodeStateMachineTransition_l6c8r"), "LandHard", "Idle", SubResource("AnimationNodeStateMachineTransition_amdah"), "Idle", "Fall", SubResource("AnimationNodeStateMachineTransition_4ettq"), "Fall", "Idle", SubResource("AnimationNodeStateMachineTransition_7abig"), "Fall", "Jump", SubResource("AnimationNodeStateMachineTransition_okx1i"), "Jump", "Punch", SubResource("AnimationNodeStateMachineTransition_02ula"), "Punch", "Jump", SubResource("AnimationNodeStateMachineTransition_lp50d"), "Idle", "Run", SubResource("AnimationNodeStateMachineTransition_nmlf0"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_cdcaw"), "Punch", "Kick", SubResource("AnimationNodeStateMachineTransition_wc230"), "Kick", "Idle", SubResource("AnimationNodeStateMachineTransition_nj85d"), "Fall", "Punch", SubResource("AnimationNodeStateMachineTransition_07v4q"), "Punch", "Fall", SubResource("AnimationNodeStateMachineTransition_nsdyb")]
+graph_offset = Vector2(19, 75.0935)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mn827"]
+size = Vector3(0.5, 1.604, 0.5)
+
+[node name="Enemy" type="CharacterBody3D"]
+script = ExtResource("1_feo1k")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.757918, 0)
+shape = SubResource("BoxShape3D_jqwhu")
+
+[node name="Mesh" parent="." instance=ExtResource("1_uiyes")]
+script = ExtResource("2_cxkrs")
+
+[node name="Skeleton3D" parent="Mesh/Armature" index="0"]
+bones/1/position = Vector3(2.08848e-09, 0.636109, 0.00266573)
+bones/1/rotation = Quaternion(0.0598809, 1.18995e-07, 7.13835e-09, 0.998206)
+bones/2/rotation = Quaternion(-0.0552952, 4.64506e-14, -1.31834e-08, 0.99847)
+bones/2/scale = Vector3(1, 1, 1)
+bones/3/rotation = Quaternion(-0.0218608, -2.38362e-07, 2.22098e-15, 0.999761)
+bones/4/rotation = Quaternion(-0.044071, -8.93765e-14, 1.05073e-08, 0.999028)
+bones/5/rotation = Quaternion(0.0942433, 1.1051e-09, -3.09146e-08, 0.995549)
+bones/5/scale = Vector3(1, 1, 1)
+bones/6/rotation = Quaternion(0.0270065, 0.00424482, -0.376636, 0.925958)
+bones/7/rotation = Quaternion(-0.257941, 0.265982, -0.721275, 0.58522)
+bones/8/rotation = Quaternion(0.724335, 9.12896e-05, 0.0556743, 0.687196)
+bones/9/rotation = Quaternion(0.0270065, -0.00424444, 0.376636, 0.925958)
+bones/10/rotation = Quaternion(-0.257942, -0.265982, 0.721275, 0.58522)
+bones/11/rotation = Quaternion(0.724335, -9.13842e-05, -0.0556742, 0.687196)
+bones/12/position = Vector3(0.418763, 0.0109733, -0.0445773)
+bones/12/rotation = Quaternion(-0.0333911, -0.0130279, -0.545213, 0.837531)
+bones/14/position = Vector3(-0.418763, 0.0109734, -0.0445771)
+bones/14/rotation = Quaternion(-0.0333909, 0.0130281, 0.545213, 0.837531)
+bones/15/rotation = Quaternion(-0.000891735, 0.00838936, 0.707106, 0.707057)
+bones/16/position = Vector3(0.151318, 0.352108, 0.130953)
+bones/16/rotation = Quaternion(-0.502695, 0.496892, 0.514357, -0.485626)
+bones/17/position = Vector3(-0.151317, 0.352108, 0.130953)
+bones/17/rotation = Quaternion(0.502696, 0.496892, 0.514357, 0.485626)
+bones/18/position = Vector3(0.115276, 0.00714147, 0.0126171)
+bones/18/rotation = Quaternion(-0.647911, 0.0866973, 0.702035, -0.282565)
+bones/18/scale = Vector3(0.999988, 1, 0.999967)
+bones/19/rotation = Quaternion(0.19359, 0.0200291, -0.408218, 0.891897)
+bones/19/scale = Vector3(0.999999, 1, 1)
+bones/20/position = Vector3(-0.115276, 0.00714159, 0.012617)
+bones/20/rotation = Quaternion(0.647911, 0.0866972, 0.702035, 0.282564)
+bones/20/scale = Vector3(0.999988, 1, 0.999967)
+bones/21/rotation = Quaternion(0.19359, -0.0200289, 0.408218, 0.891897)
+bones/21/scale = Vector3(0.999999, 1, 1)
+bones/22/position = Vector3(0.161352, 0.0405048, 0.00846978)
+bones/23/rotation = Quaternion(0.94193, -0.0319537, 0.322367, 0.088467)
+bones/23/scale = Vector3(1, 1, 1)
+bones/24/position = Vector3(0.142124, 0.582651, 0.297712)
+bones/24/rotation = Quaternion(-0.279577, 0.649489, 0.64949, -0.279577)
+bones/25/position = Vector3(-0.161352, 0.0405048, 0.00846978)
+bones/26/rotation = Quaternion(0.94193, 0.0319537, -0.322367, 0.088467)
+bones/26/scale = Vector3(1, 1, 1)
+bones/27/position = Vector3(-0.142124, 0.582651, 0.297712)
+bones/27/rotation = Quaternion(0.279577, 0.649489, 0.64949, 0.279577)
+
+[node name="AnimationTree" type="AnimationTree" parent="Mesh"]
+tree_root = SubResource("AnimationNodeStateMachine_coepq")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="Hitbox" parent="Mesh" instance=ExtResource("3_4s5p3")]
+
+[node name="Hurtbox" parent="Mesh" instance=ExtResource("5_nqwyv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.851516, 0)
+
+[node name="CollisionShape3D" parent="Mesh/Hurtbox" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0538468, 0)
+shape = SubResource("BoxShape3D_mn827")
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("4_35f2c")
+
+[node name="General" type="Node" parent="StateMachine"]
+script = ExtResource("7_72t0e")
+
+[node name="Struk" type="Node" parent="StateMachine"]
+script = ExtResource("5_oa01s")
+
+[editable path="Mesh"]
+[editable path="Mesh/Hitbox"]
+[editable path="Mesh/Hurtbox"]
