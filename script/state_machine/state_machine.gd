@@ -26,11 +26,12 @@ func _input(event: InputEvent) -> void:
 		state.input(event)
 
 
-func transition_to(state_path: String, params := []) -> void:
+func transition_to(state_path: String, reset_state: bool = false, params := []) -> void:
 	if !has_node(state_path) or transitioning:
 		return
 	var new_state = get_node(state_path)
-	if new_state == state:
+	
+	if new_state == state and not reset_state:
 		return
 	
 	transitioning = true

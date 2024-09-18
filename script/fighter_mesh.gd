@@ -6,26 +6,16 @@ extends Node3D
 @export var animation_tree: AnimationTree
 @export var _tracker: AnimationPlayer
 
-enum animations {NONE, IDLE, WALK, JUMP, RUN, FALL, LANDHARD, PUNCH, KICK}
+var direction: int
 
-func transition_to(animation_id: int) -> void:
-	match animation_id:
-		animations.NONE:
-			_playback.stop() 
-		animations.IDLE:
-			_playback.travel("Idle")
-		animations.WALK:
-			_playback.travel("Walk")
-		animations.JUMP:
-			_playback.travel("Jump")
-		animations.RUN:
-			_playback.travel("Run")
-		animations.FALL:
-			_playback.travel("Fall")
-		animations.LANDHARD:
-			_playback.travel("LandHard")
-		animations.PUNCH:
-			_playback.travel("Punch")
-			_tracker.play("Punch")
-		animations.KICK:
-			_playback.travel("Kick")
+enum animations {NONE, IDLE, WALK, JUMP, RUN, FALL, LANDHARD, ATTACK1, ATTACK2}
+
+func transition_to(animation_id: int, has_tracker: bool = false, reset: bool = false) -> void:
+	var animation_string = animations.keys()[animation_id].capitalize().replace(" ", "")
+	if not reset:
+		_playback.travel(animation_string)
+	else:
+		_playback.start(animation_string)
+
+	if has_tracker:
+		_tracker.play("Attack1")

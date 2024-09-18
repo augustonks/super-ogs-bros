@@ -1,0 +1,74 @@
+[gd_resource type="AnimationNodeBlendTree" load_steps=16 format=3 uid="uid://cl5yvc05o5h6s"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xewdy"]
+animation = &"Fall"
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_38ioe"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_663kl"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_kf650"]
+animation = &"Jump"
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_jqyug"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0eb7x"]
+animation = &"Kick"
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_l4fau"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gb822"]
+animation = &"LandHard"
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_ndf0t"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_parkt"]
+animation = &"Punch"
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_ipfvv"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_m4ntt"]
+animation = &"Run"
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_2babl"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5esyu"]
+animation = &"Walk"
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_8ut75"]
+
+[resource]
+graph_offset = Vector2(-290, -183.289)
+nodes/fall/node = SubResource("AnimationNodeAnimation_xewdy")
+nodes/fall/position = Vector2(1020, 180)
+nodes/fall_blend/node = SubResource("AnimationNodeBlend2_38ioe")
+nodes/fall_blend/position = Vector2(1240, -140)
+nodes/idle/node = SubResource("AnimationNodeAnimation_663kl")
+nodes/idle/position = Vector2(320, -40)
+nodes/jump/node = SubResource("AnimationNodeAnimation_kf650")
+nodes/jump/position = Vector2(780, 180)
+nodes/jump_blend/node = SubResource("AnimationNodeBlend2_jqyug")
+nodes/jump_blend/position = Vector2(1020, -140)
+nodes/kick/node = SubResource("AnimationNodeAnimation_0eb7x")
+nodes/kick/position = Vector2(1660, 300)
+nodes/kick_blend/node = SubResource("AnimationNodeBlend2_l4fau")
+nodes/kick_blend/position = Vector2(2000, -160)
+nodes/landhard/node = SubResource("AnimationNodeAnimation_gb822")
+nodes/landhard/position = Vector2(1240, 180)
+nodes/landhard_blend/node = SubResource("AnimationNodeBlend2_ndf0t")
+nodes/landhard_blend/position = Vector2(1460, -140)
+nodes/output/position = Vector2(2380, -20)
+nodes/punch/node = SubResource("AnimationNodeAnimation_parkt")
+nodes/punch/position = Vector2(1440, 180)
+nodes/punch_blend/node = SubResource("AnimationNodeBlend2_ipfvv")
+nodes/punch_blend/position = Vector2(1740, -100)
+nodes/run/node = SubResource("AnimationNodeAnimation_m4ntt")
+nodes/run/position = Vector2(540, 180)
+nodes/run_blend/node = SubResource("AnimationNodeBlend2_2babl")
+nodes/run_blend/position = Vector2(780, -140)
+nodes/walk/node = SubResource("AnimationNodeAnimation_5esyu")
+nodes/walk/position = Vector2(320, 180)
+nodes/walk_blend/node = SubResource("AnimationNodeBlend2_8ut75")
+nodes/walk_blend/position = Vector2(540, -140)
+node_connections = [&"fall_blend", 0, &"jump_blend", &"fall_blend", 1, &"fall", &"jump_blend", 0, &"run_blend", &"jump_blend", 1, &"jump", &"kick_blend", 0, &"punch_blend", &"kick_blend", 1, &"kick", &"landhard_blend", 0, &"fall_blend", &"landhard_blend", 1, &"landhard", &"output", 0, &"kick_blend", &"punch_blend", 0, &"landhard_blend", &"punch_blend", 1, &"punch", &"run_blend", 0, &"walk_blend", &"run_blend", 1, &"run", &"walk_blend", 0, &"idle", &"walk_blend", 1, &"walk"]

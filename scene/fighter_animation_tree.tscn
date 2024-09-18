@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://7p17v621c06e"]
+
+[ext_resource type="AnimationNodeStateMachine" uid="uid://ccvirx574kyru" path="res://assets/animations/fighter_animation_state_machine_messy.tres" id="1_b8ksk"]
+
+[node name="AnimationTree" type="AnimationTree"]
+root_node = NodePath("../Mesh")
+tree_root = ExtResource("1_b8ksk")
+anim_player = NodePath("../Mesh/AnimationPlayer")

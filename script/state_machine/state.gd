@@ -3,6 +3,7 @@ extends Node
 
 @onready var _state_machine: StateMachine = _get_state_machine(self)
 var _parent
+var _processing := false
 
 
 func _ready() -> void:
@@ -10,7 +11,8 @@ func _ready() -> void:
 
 
 func enter(_params := []) -> void:
-	pass
+	#print(name, " entered!")
+	_processing = true
 
 
 func process(_delta: float) -> void:
@@ -26,7 +28,7 @@ func input(_event: InputEvent) -> void:
 
 
 func exit() -> void:
-	pass
+	_processing = false
 
 
 func _get_state_machine(node: Node) -> Node:

@@ -9,14 +9,16 @@ func physics_process(delta: float, can_move := true, can_jump := true) -> void:
 
 func _handle_movement(delta: float, can_move: bool, can_jump: bool) -> void:
 	_update_speed()
-	if can_jump:
-		if Input.is_action_just_pressed("jump") and _player.is_on_floor():
-			_state_machine.transition_to("Move/Air")
-	
+
 	if Input.is_action_just_pressed("attack"):
-		_state_machine.transition_to("Punch")
+		_state_machine.transition_to("Attack")
+
+	if can_jump:
+		if Input.is_action_just_pressed("jump") and _fighter.is_on_floor():
+			_state_machine.transition_to("Move/Air")
+
 
 	if can_move:
 		_update_velocity(delta, _get_input_axis())
 	_rotate_mesh(delta)
-	_player.move_and_slide()
+	_fighter.move_and_slide()
