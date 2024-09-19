@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://corox2g3gguuy"]
+[gd_scene load_steps=9 format=3 uid="uid://corox2g3gguuy"]
 
 [ext_resource type="PackedScene" uid="uid://dsfhj2cjlw5jc" path="res://scene/fighter.tscn" id="1_topwr"]
 [ext_resource type="PackedScene" uid="uid://b34xyuw4ynwsx" path="res://assets/models/dummy/boneco-base-v2.glb" id="1_uiyes"]
-[ext_resource type="Script" path="res://script/fighter_mesh.gd" id="2_cxkrs"]
+[ext_resource type="Script" path="res://script/fighter/fighter_mesh.gd" id="2_cxkrs"]
 [ext_resource type="PackedScene" uid="uid://7p17v621c06e" path="res://scene/fighter_animation_tree.tscn" id="5_68gl7"]
+[ext_resource type="Script" path="res://script/fighter/fighter_ai.gd" id="6_blxsg"]
 [ext_resource type="Script" path="res://script/enemy/state/base.gd" id="7_jmgql"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_u8hh7"]
@@ -35,32 +36,32 @@ script = ExtResource("2_cxkrs")
 animation_tree = NodePath("../AnimationTree")
 
 [node name="Skeleton3D" parent="Mesh/Armature" index="0"]
-bones/1/position = Vector3(3.92768e-09, 0.571581, 0.00266574)
+bones/1/position = Vector3(1.62646e-11, 0.711666, 0.00266573)
 bones/1/rotation = Quaternion(0.0598809, 1.18995e-07, 7.13835e-09, 0.998206)
 bones/2/rotation = Quaternion(-0.0552952, 4.64506e-14, -1.31834e-08, 0.99847)
 bones/3/rotation = Quaternion(-0.0218608, -2.38362e-07, 2.22098e-15, 0.999761)
 bones/4/rotation = Quaternion(-0.044071, -8.93765e-14, 1.05073e-08, 0.999028)
-bones/5/rotation = Quaternion(0.0627982, 2.07956e-09, -3.08644e-08, 0.998026)
-bones/7/rotation = Quaternion(-0.518463, -0.0478182, -0.613026, 0.59423)
-bones/8/rotation = Quaternion(0.863462, 6.64394e-05, 0.066368, 0.500029)
-bones/10/rotation = Quaternion(-0.518463, 0.0478178, 0.613026, 0.59423)
-bones/11/rotation = Quaternion(0.863462, -6.65092e-05, -0.0663678, 0.500029)
-bones/12/position = Vector3(0.428328, 0.183033, -0.0386323)
-bones/12/rotation = Quaternion(-0.0282, -0.0222834, -0.412762, 0.91013)
-bones/14/position = Vector3(-0.428328, 0.183033, -0.038632)
-bones/14/rotation = Quaternion(-0.0281999, 0.0222837, 0.412762, 0.91013)
-bones/16/position = Vector3(0.148681, 0.410942, 0.107282)
+bones/5/rotation = Quaternion(0.129748, 6.96269e-15, -3.09344e-08, 0.991547)
+bones/7/rotation = Quaternion(0.0904837, 0.0843932, -0.834188, 0.537421)
+bones/8/rotation = Quaternion(0.00248365, 0.000132862, 0.000190874, 0.999997)
+bones/10/rotation = Quaternion(0.0904836, -0.0843933, 0.834188, 0.537421)
+bones/11/rotation = Quaternion(0.00248367, -0.000132976, -0.00019089, 0.999997)
+bones/12/position = Vector3(0.392975, -0.18939, -0.0515003)
+bones/12/rotation = Quaternion(-0.0381128, -0.00275578, -0.673523, 0.738178)
+bones/14/position = Vector3(-0.392975, -0.18939, -0.0515001)
+bones/14/rotation = Quaternion(-0.0381127, 0.00275595, 0.673523, 0.738178)
+bones/16/position = Vector3(0.154312, 0.2853, 0.157833)
 bones/16/rotation = Quaternion(-0.502695, 0.496892, 0.514357, -0.485626)
-bones/17/position = Vector3(-0.14868, 0.410941, 0.107282)
+bones/17/position = Vector3(-0.154312, 0.2853, 0.157833)
 bones/18/position = Vector3(0.115276, 0.00714147, 0.0126171)
-bones/18/rotation = Quaternion(-0.622087, 0.107434, 0.68418, -0.365191)
+bones/18/rotation = Quaternion(-0.681174, 0.0200833, 0.728219, -0.0727701)
 bones/18/scale = Vector3(0.999988, 1, 0.999967)
-bones/19/rotation = Quaternion(0.257901, 0.0179305, -0.543826, 0.798385)
+bones/19/rotation = Quaternion(0.00988522, 0.0224428, -0.0208446, 0.999482)
 bones/19/scale = Vector3(0.999999, 1, 1)
 bones/20/position = Vector3(-0.115276, 0.00714159, 0.012617)
-bones/20/rotation = Quaternion(0.622086, 0.107434, 0.68418, 0.36519)
+bones/20/rotation = Quaternion(0.681174, 0.0200826, 0.728219, 0.072768)
 bones/20/scale = Vector3(0.999988, 1, 0.999967)
-bones/21/rotation = Quaternion(0.257901, -0.0179303, 0.543826, 0.798385)
+bones/21/rotation = Quaternion(0.00988327, -0.0224426, 0.0208405, 0.999482)
 bones/21/scale = Vector3(0.999999, 1, 1)
 bones/22/position = Vector3(0.161352, 0.0405048, 0.00846978)
 bones/24/position = Vector3(0.142124, 0.582651, 0.297712)
@@ -72,6 +73,9 @@ bones/27/position = Vector3(-0.142124, 0.582651, 0.297712)
 material_override = SubResource("StandardMaterial3D_xndt2")
 
 [node name="AnimationTree" parent="." index="6" instance=ExtResource("5_68gl7")]
+
+[node name="FighterAI" type="Node" parent="." index="7"]
+script = ExtResource("6_blxsg")
 
 [editable path="Hitbox"]
 [editable path="Hurtbox"]

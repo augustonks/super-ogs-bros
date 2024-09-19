@@ -1,0 +1,7 @@
+[gd_resource type="PhysicalSkyMaterial" format=3 uid="uid://becb1xhmjcb18"]
+
+[resource]
+rayleigh_color = Color(0.2925, 0.559375, 0.75, 1)
+turbidity = 0.0
+ground_color = Color(0.3604, 0.546833, 0.68, 1)
+energy_multiplier = 2.12

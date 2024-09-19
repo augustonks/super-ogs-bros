@@ -2,6 +2,7 @@ extends PlayerState
 
 
 func physics_process(delta: float, can_move := true, can_jump := true) -> void:
+	_previous_direction = _input_axis
 	super(delta)
 	_apply_gravity(delta)
 	_handle_movement(delta, can_move, can_jump)
@@ -21,4 +22,5 @@ func _handle_movement(delta: float, can_move: bool, can_jump: bool) -> void:
 	if can_move:
 		_update_velocity(delta, _get_input_axis())
 	_rotate_mesh(delta)
+
 	_fighter.move_and_slide()

@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://dsfhj2cjlw5jc"]
 
 [ext_resource type="PackedScene" uid="uid://c8a3vyya1lw0j" path="res://scene/component/hitbox.tscn" id="1_le7mf"]
-[ext_resource type="Script" path="res://script/fighter.gd" id="1_m4ulg"]
+[ext_resource type="Script" path="res://script/fighter/fighter.gd" id="1_m4ulg"]
 [ext_resource type="PackedScene" uid="uid://ycfeugdymgyx" path="res://scene/component/hurtbox.tscn" id="3_j1y2f"]
 [ext_resource type="Script" path="res://script/state_machine/state_machine.gd" id="4_l8e5l"]
 [ext_resource type="Script" path="res://script/state_machine/struck.gd" id="5_6k4cq"]

@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://1eylassd1udl"]
+[gd_scene load_steps=8 format=3 uid="uid://1eylassd1udl"]
 
 [ext_resource type="Script" path="res://script/camera/player_camera.gd" id="2_7nj4w"]
+[ext_resource type="Texture2D" uid="uid://b11w7ajiq2rj" path="res://assets/images/green_plains.jpg" id="3_faw4e"]
 [ext_resource type="PackedScene" uid="uid://corox2g3gguuy" path="res://scene/enemy/enemy.tscn" id="3_khlrx"]
 [ext_resource type="PackedScene" uid="uid://kux72ucdbcaj" path="res://scene/player/player.tscn" id="4_umlni"]
 
@@ -10,33 +11,37 @@ albedo_color = Color(0.22015, 0.327622, 0.384406, 1)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eosxa"]
 albedo_color = Color(0.154089, 0.246087, 0.281292, 1)
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6elbk"]
-
-[sub_resource type="Sky" id="Sky_ev3y3"]
-sky_material = SubResource("ProceduralSkyMaterial_6elbk")
-
 [sub_resource type="Environment" id="Environment_ltbvv"]
 background_mode = 2
-sky = SubResource("Sky_ev3y3")
+sky_rotation = Vector3(0, 3.47495, 0)
+ambient_light_source = 2
+ambient_light_color = Color(0.347073, 0.482548, 0.569626, 1)
+tonemap_mode = 2
+tonemap_exposure = 0.81
+tonemap_white = 1.97
 ssil_radius = 10.14
 ssil_intensity = 15.89
 sdfgi_use_occlusion = true
-fog_density = 0.0622
+glow_enabled = true
+glow_strength = 0.39
+glow_bloom = 0.27
+fog_density = 0.1345
 fog_sky_affect = 0.0
 volumetric_fog_albedo = Color(0.181623, 0.344009, 0.950898, 1)
 adjustment_enabled = true
 adjustment_brightness = 1.07
-adjustment_saturation = 2.03
+adjustment_contrast = 1.29
+adjustment_saturation = 2.16
 
 [node name="Node3D" type="Node3D"]
 
 [node name="Blocks" type="Node3D" parent="."]
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Blocks"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.639165, -8.25159, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.543511, -8.25159, 0)
 material_override = SubResource("StandardMaterial3D_xg1pe")
 use_collision = true
-size = Vector3(10.225, 16.503, 1.59)
+size = Vector3(15.1407, 16.503, 1.59)
 
 [node name="CSGBox3D10" type="CSGBox3D" parent="Blocks"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.4221, -8.25159, 0)
@@ -74,22 +79,27 @@ material_override = SubResource("StandardMaterial3D_eosxa")
 use_collision = true
 size = Vector3(2.907, 16.503, 2.859)
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 3, 4)
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ltbvv")
 
-[node name="DirectionalLight3D3" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.66985, 0.43324, 0.602996, 0.0918328, -0.757543, 0.646293, 0.736796, 0.488294, 0.467655, 0.274683, 1.24981, 6.17366)
 light_color = Color(0.957352, 0.964569, 0.98567, 1)
+light_bake_mode = 1
 shadow_enabled = true
+directional_shadow_mode = 0
 
-[node name="Camera3D2" type="Camera3D" parent="." node_paths=PackedStringArray("_player")]
-transform = Transform3D(1, 0, 0, 0, 0.93986, 0.341561, 0, -0.341561, 0.93986, 0, 3.7165, 4)
+[node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("_player")]
+transform = Transform3D(1, 0, 0, 0, 0.997916, 0.0645323, 0, -0.0645323, 0.997916, 0, 2.71499, 5.67229)
 current = true
+size = 7.803
 script = ExtResource("2_7nj4w")
 _player = NodePath("../Player")
+
+[node name="Sprite3D" type="Sprite3D" parent="Camera3D"]
+transform = Transform3D(2.75, 0, 0, 0, 2.75, 0, 0, 0, 2.75, 0, -0.298614, -17.9547)
+modulate = Color(0.0928108, 0.556777, 1, 1)
+texture = ExtResource("3_faw4e")
 
 [node name="Player" parent="." instance=ExtResource("4_umlni")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0301554, 0)
