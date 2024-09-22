@@ -1,7 +1,7 @@
-extends PlayerState
+extends FighterBotState
 
 
-func enter(_params := []) -> void:
+func enter(params := []) -> void:
 	super()
 	_mesh.transition_to(_mesh.animations.IDLE)
 	_acceleration_timer = get_tree().create_timer(1)

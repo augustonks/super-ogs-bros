@@ -21,6 +21,6 @@ func _handle_movement(delta: float, can_move: bool, can_jump: bool) -> void:
 
 	if can_move:
 		_update_velocity(delta, _get_input_axis())
-	_rotate_mesh(delta)
+	_rotate_mesh(delta, _input_axis)
 
 	_fighter.move_and_slide()

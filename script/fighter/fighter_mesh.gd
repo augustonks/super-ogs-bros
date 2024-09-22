@@ -17,5 +17,5 @@ func transition_to(animation_id: int, has_tracker: bool = false, reset: bool = f
 	else:
 		_playback.start(animation_string)
 
-	if has_tracker:
+	if has_tracker and _tracker:
 		_tracker.play("Attack1")

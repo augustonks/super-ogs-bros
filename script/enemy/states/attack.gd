@@ -1,4 +1,4 @@
-extends PlayerState
+extends FighterBotState
 
 @onready var _attack_duration: Timer = $AttackDuration
 
@@ -13,7 +13,7 @@ func enter(_params := []) -> void:
 
 
 func physics_process(delta: float) -> void:
-	if Input.is_action_just_pressed("attack"):
+	if _fighter_ai.is_player_near:
 		_attack_next = true
 
 	_fighter.move_and_slide()
@@ -37,3 +37,8 @@ func _hit() -> void:
 	else:
 		_given_combos = 0
 		_state_machine.transition_to("Move/Idle")
+
+
+func exit() -> void:
+	super()
+	_given_combos = 0

@@ -87,14 +87,14 @@ transform = Transform3D(-0.66985, 0.43324, 0.602996, 0.0918328, -0.757543, 0.646
 light_color = Color(0.957352, 0.964569, 0.98567, 1)
 light_bake_mode = 1
 shadow_enabled = true
-directional_shadow_mode = 0
 
-[node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("_player")]
-transform = Transform3D(1, 0, 0, 0, 0.997916, 0.0645323, 0, -0.0645323, 0.997916, 0, 2.71499, 5.67229)
+[node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("_fighter1", "_fighter2")]
+transform = Transform3D(1, 0, 0, 0, 0.997916, 0.0645323, 0, -0.0645323, 0.997916, 0, 2.71499, 10.9858)
 current = true
 size = 7.803
 script = ExtResource("2_7nj4w")
-_player = NodePath("../Player")
+_fighter1 = NodePath("../Player")
+_fighter2 = NodePath("../Enemy")
 
 [node name="Sprite3D" type="Sprite3D" parent="Camera3D"]
 transform = Transform3D(2.75, 0, 0, 0, 2.75, 0, 0, 0, 2.75, 0, -0.298614, -17.9547)
@@ -102,7 +102,7 @@ modulate = Color(0.0928108, 0.556777, 1, 1)
 texture = ExtResource("3_faw4e")
 
 [node name="Player" parent="." instance=ExtResource("4_umlni")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0301554, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.29807, -0.0301554, 0)
 
 [node name="Enemy" parent="." instance=ExtResource("3_khlrx")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2.57594, 1.69341, 0)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 3.97603, -0.171364, 0)

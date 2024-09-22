@@ -1,81 +1,250 @@
-[gd_scene load_steps=9 format=3 uid="uid://corox2g3gguuy"]
+[gd_scene load_steps=20 format=3 uid="uid://corox2g3gguuy"]
 
 [ext_resource type="PackedScene" uid="uid://dsfhj2cjlw5jc" path="res://scene/fighter.tscn" id="1_topwr"]
 [ext_resource type="PackedScene" uid="uid://b34xyuw4ynwsx" path="res://assets/models/dummy/boneco-base-v2.glb" id="1_uiyes"]
+[ext_resource type="Script" path="res://script/enemy/states/move.gd" id="2_bsmho"]
 [ext_resource type="Script" path="res://script/fighter/fighter_mesh.gd" id="2_cxkrs"]
+[ext_resource type="Script" path="res://script/enemy/fighter_bot.gd" id="2_eewm3"]
+[ext_resource type="Script" path="res://script/fighter/shared_states/idle.gd" id="2_yuwrk"]
+[ext_resource type="Script" path="res://script/enemy/states/walk.gd" id="4_tdq3d"]
 [ext_resource type="PackedScene" uid="uid://7p17v621c06e" path="res://scene/fighter_animation_tree.tscn" id="5_68gl7"]
+[ext_resource type="Script" path="res://script/enemy/states/jump.gd" id="6_2m6qc"]
 [ext_resource type="Script" path="res://script/fighter/fighter_ai.gd" id="6_blxsg"]
-[ext_resource type="Script" path="res://script/enemy/state/base.gd" id="7_jmgql"]
+[ext_resource type="Script" path="res://script/enemy/states/attack.gd" id="7_v5n36"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_u8hh7"]
 size = Vector3(0.555, 1.518, 0.21)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_isdwu"]
+size = Vector3(0.5, 0.5, 0.5)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xndt2"]
 albedo_color = Color(1, 0.651653, 0.629567, 1)
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_roghy"]
+radius = 0.401
+
+[sub_resource type="Animation" id="Animation_6808m"]
+resource_name = "Attack1"
+length = 0.25
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hitbox:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.19),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.297224, 1.26151, -0.217551), Vector3(0.0262989, 1.26151, 0.654679)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hitbox/CollisionShape3D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.07, 0.21),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+
+[sub_resource type="Animation" id="Animation_qyrrw"]
+resource_name = "Attack2"
+length = 0.4583
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hitbox:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.16),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.124, 1.022, -0.011), Vector3(0.0755762, 1.02221, 0.827788)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hitbox/CollisionShape3D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.04, 0.18),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+
+[sub_resource type="Animation" id="Animation_xw0g7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hitbox:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.297224, 1.26151, -0.217551)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hitbox/CollisionShape3D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_j3dot"]
+_data = {
+"Attack1": SubResource("Animation_6808m"),
+"Attack2": SubResource("Animation_qyrrw"),
+"RESET": SubResource("Animation_xw0g7")
+}
+
 [node name="Enemy" instance=ExtResource("1_topwr")]
+collision_layer = 16
+script = ExtResource("2_eewm3")
 
 [node name="CollisionShape3D" parent="." index="0"]
 shape = SubResource("BoxShape3D_u8hh7")
+
+[node name="Hitbox" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.297224, 1.26151, -0.217551)
+
+[node name="CollisionShape3D" parent="Hitbox" index="0"]
+shape = SubResource("BoxShape3D_isdwu")
 
 [node name="CollisionShape3D" parent="Hurtbox" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.762047, 0)
 shape = SubResource("BoxShape3D_u8hh7")
 
 [node name="StateMachine" parent="." index="3" node_paths=PackedStringArray("state")]
-state = NodePath("Base")
+state = NodePath("Move/Idle")
 
-[node name="Base" type="Node" parent="StateMachine" index="0"]
-script = ExtResource("7_jmgql")
+[node name="Move" type="Node" parent="StateMachine" index="0"]
+script = ExtResource("2_bsmho")
+
+[node name="Idle" type="Node" parent="StateMachine/Move" index="0"]
+script = ExtResource("2_yuwrk")
+
+[node name="Walk" type="Node" parent="StateMachine/Move" index="1"]
+script = ExtResource("4_tdq3d")
+
+[node name="Air" type="Node" parent="StateMachine/Move" index="2" node_paths=PackedStringArray("_wall_check")]
+script = ExtResource("6_2m6qc")
+_wall_check = NodePath("../../../FighterAI/WallCheck")
 
 [node name="Struck" parent="StateMachine" index="1"]
-next_state = "Base"
+next_state = "Move/Idle"
 
-[node name="Mesh" parent="." index="5" node_paths=PackedStringArray("animation_tree") instance=ExtResource("1_uiyes")]
+[node name="Attack" type="Node" parent="StateMachine" index="2"]
+script = ExtResource("7_v5n36")
+
+[node name="AttackDuration" type="Timer" parent="StateMachine/Attack" index="0"]
+wait_time = 0.32
+one_shot = true
+
+[node name="Mesh" parent="." index="5" node_paths=PackedStringArray("animation_tree", "_tracker") instance=ExtResource("1_uiyes")]
 script = ExtResource("2_cxkrs")
 animation_tree = NodePath("../AnimationTree")
+_tracker = NodePath("../Tracker")
 
 [node name="Skeleton3D" parent="Mesh/Armature" index="0"]
-bones/1/position = Vector3(1.62646e-11, 0.711666, 0.00266573)
+bones/1/position = Vector3(6.10523e-09, 0.495181, 0.00266574)
 bones/1/rotation = Quaternion(0.0598809, 1.18995e-07, 7.13835e-09, 0.998206)
 bones/2/rotation = Quaternion(-0.0552952, 4.64506e-14, -1.31834e-08, 0.99847)
+bones/2/scale = Vector3(1, 1, 1)
 bones/3/rotation = Quaternion(-0.0218608, -2.38362e-07, 2.22098e-15, 0.999761)
 bones/4/rotation = Quaternion(-0.044071, -8.93765e-14, 1.05073e-08, 0.999028)
-bones/5/rotation = Quaternion(0.129748, 6.96269e-15, -3.09344e-08, 0.991547)
-bones/7/rotation = Quaternion(0.0904837, 0.0843932, -0.834188, 0.537421)
-bones/8/rotation = Quaternion(0.00248365, 0.000132862, 0.000190874, 0.999997)
-bones/10/rotation = Quaternion(0.0904836, -0.0843933, 0.834188, 0.537421)
-bones/11/rotation = Quaternion(0.00248367, -0.000132976, -0.00019089, 0.999997)
-bones/12/position = Vector3(0.392975, -0.18939, -0.0515003)
-bones/12/rotation = Quaternion(-0.0381128, -0.00275578, -0.673523, 0.738178)
-bones/14/position = Vector3(-0.392975, -0.18939, -0.0515001)
-bones/14/rotation = Quaternion(-0.0381127, 0.00275595, 0.673523, 0.738178)
-bones/16/position = Vector3(0.154312, 0.2853, 0.157833)
+bones/5/rotation = Quaternion(0.0254906, 3.2305e-09, -3.07652e-08, 0.999675)
+bones/5/scale = Vector3(1, 1, 1)
+bones/6/rotation = Quaternion(0.0270065, 0.00424482, -0.376636, 0.925958)
+bones/7/rotation = Quaternion(-0.46737, -0.43574, -0.373355, 0.672534)
+bones/8/rotation = Quaternion(0.858986, 6.74536e-05, 0.066024, 0.507724)
+bones/9/rotation = Quaternion(0.0270065, -0.00424444, 0.376636, 0.925958)
+bones/10/rotation = Quaternion(-0.46737, 0.43574, 0.373355, 0.672534)
+bones/11/rotation = Quaternion(0.858986, -6.75181e-05, -0.0660238, 0.507724)
+bones/12/position = Vector3(0.439652, 0.386745, -0.0315935)
+bones/12/rotation = Quaternion(-0.0212311, -0.0325615, -0.244028, 0.968989)
+bones/14/position = Vector3(-0.439652, 0.386746, -0.0315933)
+bones/14/rotation = Quaternion(-0.0212311, 0.0325618, 0.244028, 0.968989)
+bones/15/rotation = Quaternion(-0.000891735, 0.00838936, 0.707106, 0.707057)
+bones/16/position = Vector3(0.145558, 0.480599, 0.0792558)
 bones/16/rotation = Quaternion(-0.502695, 0.496892, 0.514357, -0.485626)
-bones/17/position = Vector3(-0.154312, 0.2853, 0.157833)
+bones/17/position = Vector3(-0.145558, 0.480599, 0.0792559)
+bones/17/rotation = Quaternion(0.502696, 0.496892, 0.514357, 0.485626)
 bones/18/position = Vector3(0.115276, 0.00714147, 0.0126171)
-bones/18/rotation = Quaternion(-0.681174, 0.0200833, 0.728219, -0.0727701)
+bones/18/rotation = Quaternion(-0.589796, 0.122032, 0.663181, -0.444343)
 bones/18/scale = Vector3(0.999988, 1, 0.999967)
-bones/19/rotation = Quaternion(0.00988522, 0.0224428, -0.0208446, 0.999482)
+bones/19/rotation = Quaternion(0.312215, 0.015378, -0.658356, 0.684728)
 bones/19/scale = Vector3(0.999999, 1, 1)
 bones/20/position = Vector3(-0.115276, 0.00714159, 0.012617)
-bones/20/rotation = Quaternion(0.681174, 0.0200826, 0.728219, 0.072768)
+bones/20/rotation = Quaternion(0.589796, 0.122032, 0.663181, 0.444343)
 bones/20/scale = Vector3(0.999988, 1, 0.999967)
-bones/21/rotation = Quaternion(0.00988327, -0.0224426, 0.0208405, 0.999482)
+bones/21/rotation = Quaternion(0.312215, -0.0153778, 0.658356, 0.684729)
 bones/21/scale = Vector3(0.999999, 1, 1)
 bones/22/position = Vector3(0.161352, 0.0405048, 0.00846978)
+bones/23/rotation = Quaternion(0.94193, -0.0319537, 0.322367, 0.088467)
+bones/23/scale = Vector3(1, 1, 1)
 bones/24/position = Vector3(0.142124, 0.582651, 0.297712)
 bones/24/rotation = Quaternion(-0.279577, 0.649489, 0.64949, -0.279577)
 bones/25/position = Vector3(-0.161352, 0.0405048, 0.00846978)
+bones/26/rotation = Quaternion(0.94193, 0.0319537, -0.322367, 0.088467)
+bones/26/scale = Vector3(1, 1, 1)
 bones/27/position = Vector3(-0.142124, 0.582651, 0.297712)
+bones/27/rotation = Quaternion(0.279577, 0.649489, 0.64949, 0.279577)
 
 [node name="Cube" parent="Mesh/Armature/Skeleton3D" index="0"]
 material_override = SubResource("StandardMaterial3D_xndt2")
 
 [node name="AnimationTree" parent="." index="6" instance=ExtResource("5_68gl7")]
 
-[node name="FighterAI" type="Node" parent="." index="7"]
+[node name="FighterAI" type="Node3D" parent="." index="7" node_paths=PackedStringArray("_state_machine", "_move_state") groups=["fighter_ai"]]
 script = ExtResource("6_blxsg")
+_state_machine = NodePath("../StateMachine")
+_move_state = NodePath("../StateMachine/Move")
+
+[node name="WallCheck" type="RayCast3D" parent="FighterAI" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.154431, 0)
+target_position = Vector3(0, 0, 1.46)
+
+[node name="AttackRadius" type="Area3D" parent="FighterAI" index="1"]
+collision_layer = 8
+collision_mask = 16
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FighterAI/AttackRadius" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.924448, 0)
+shape = SubResource("SphereShape3D_roghy")
+
+[node name="Debug" type="Label" parent="." index="8"]
+offset_left = 751.0
+offset_top = 8.0
+offset_right = 1135.0
+offset_bottom = 92.0
+theme_override_font_sizes/font_size = 26
+text = "awdawd
+awd"
+horizontal_alignment = 2
+
+[node name="Tracker" type="AnimationPlayer" parent="." index="9"]
+libraries = {
+"": SubResource("AnimationLibrary_j3dot")
+}
 
 [editable path="Hitbox"]
 [editable path="Hurtbox"]

@@ -10,7 +10,8 @@ func _process(delta: float) -> void:
 	var velocity_y = String("%0.2f" % velocity.y)
 	debug.text = str(
 		"FPS: ", Engine.get_frames_per_second(),  "\n",
-		"Velocity X: ", velocity_x, " Y: ", velocity_y)
+		"Velocity X: ", velocity_x, " Y: ", velocity_y, "\n",
+		"Press END to reset scene")
 	
 	if Input.is_action_just_pressed("ui_end"):
 		get_tree().reload_current_scene()
