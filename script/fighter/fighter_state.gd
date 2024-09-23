@@ -44,18 +44,18 @@ func physics_process(delta) -> void:
 		_apply_impulse(delta)
 
 
-func _apply_gravity(delta) -> void:
+func _apply_gravity(delta: float, factor := 1) -> void:
 	if not _fighter.is_on_floor():
 		_fighter.velocity.y = clamp(_fighter.velocity.y, -10, 1000)
 		if _fighter.velocity.y < 0:
-			_fighter.velocity += _fighter.get_gravity() * FALL_MULTIPLIER * delta
+			_fighter.velocity += _fighter.get_gravity() * FALL_MULTIPLIER * delta * factor
 			return
-		_fighter.velocity += _fighter.get_gravity() * delta
+		_fighter.velocity += _fighter.get_gravity() * delta * factor
 
 
 func _apply_impulse(delta:float) -> void:
-	_knockback_force = _knockback_force.lerp(Vector3.ZERO, 20 * delta)
-	_fighter.velocity = _knockback_force
+	_knockback_force.x = move_toward(_knockback_force.x, 0, 20 * delta)
+	_fighter.velocity.x = _knockback_force.x
 
 	if _knockback_force.length() < 0.1: 
 		_knockback_force = Vector3.ZERO
@@ -89,7 +89,7 @@ func _update_velocity(delta: float, direction: int) -> void:
 			_acceleration_timer = get_tree().create_timer(.05)
 
 		if (_is_accelerating and _acceleration_timer.time_left == 0):
-			_fighter.velocity.x = move_toward(_fighter.velocity.x, direction * MAX_RUN_SPEED, MAX_SPEED_ACCELERATION * delta)
+				_fighter.velocity.x = move_toward(_fighter.velocity.x, direction * MAX_RUN_SPEED, MAX_SPEED_ACCELERATION * delta)
 		# Idependentemente de como a movimentaçao começou (apos o flip ou nao), a velocidade transiciona
 		# de volta para o padrao
 		else:
@@ -101,9 +101,9 @@ func _update_velocity(delta: float, direction: int) -> void:
 			_is_accelerating = false
 
 
-func _jump() -> void:
+func _jump(factor := 1.0) -> void:
 	_remaining_jumps -= 1
-	_fighter.velocity.y = JUMP_VELOCITY
+	_fighter.velocity.y = JUMP_VELOCITY * factor
 
 
 func _rotate_mesh(delta: float, direction_x: float) -> void:

@@ -11,6 +11,8 @@ func _ready() -> void:
 func physics_process(delta: float) -> void:
 	super(delta)
 	_input_axis = _get_input_axis()
+	if _input_axis != 0:
+		_fighter.current_direction = _input_axis
 
 
 func _get_input_axis() -> int:

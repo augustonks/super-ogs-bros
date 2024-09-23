@@ -33,8 +33,8 @@ script = ExtResource("5_6k4cq")
 [node name="StateDisplay" type="Label3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1.9, 0)
 billboard = 1
-text = "22"
-font_size = 27
+text = "22222"
+font_size = 52
 outline_size = 0
 
 [editable path="Hitbox"]

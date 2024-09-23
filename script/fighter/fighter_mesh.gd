@@ -8,7 +8,9 @@ extends Node3D
 
 var direction: int
 
-enum animations {IDLE, WALK, JUMP, RUN, FALL, LANDHARD, ATTACK1, ATTACK2}
+enum animations {
+	IDLE, WALK, JUMP, RUN, FALL, LANDHARD, ATTACK1, ATTACK2,
+	WALKATTACK, JUMPATTACK, KICKAIR, STUMBLE, IDLEHIT, AIRHIT}
 
 func transition_to(animation_id: int, has_tracker: bool = false, reset: bool = false) -> void:
 	var animation_string = animations.keys()[animation_id].capitalize().replace(" ", "")
@@ -18,4 +20,4 @@ func transition_to(animation_id: int, has_tracker: bool = false, reset: bool = f
 		_playback.start(animation_string)
 
 	if has_tracker and _tracker:
-		_tracker.play("Attack1")
+		_tracker.play(animation_string)

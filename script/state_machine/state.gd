@@ -2,9 +2,10 @@ class_name State
 extends Node
 
 @onready var _state_machine: StateMachine = _get_state_machine(self)
-var _parent: State
+var _parent
 var sub_state: State
 var processing := false
+var previous_state: State 
 
 
 func _ready() -> void:

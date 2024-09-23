@@ -1,8 +1,12 @@
 extends PlayerState
 
 var _previous_velocity_y: float
+var _enter_rotation: int
+
+@export var _hitbox: Hitbox
 
 func enter(_params := []) -> void:
+	_enter_rotation = _fighter.rotation_degrees.y
 	super()
 	if not _fighter.is_on_floor(): 
 		_remaining_jumps -= 1
@@ -24,12 +28,21 @@ func physics_process(delta: float) -> void:
 		_handle_animation()
 
 	_previous_velocity_y = _fighter.velocity.y
-	_parent.physics_process(delta)
+	_parent.physics_process(delta, true, true, false)
+	
+	if not processing:
+		return
+
+	if previous_state and previous_state.name == "Attack":
+		_fighter.rotation_degrees.y = _enter_rotation
+	else:
+		_rotate_mesh(delta, _fighter.current_direction)
 
 
 func input(event: InputEvent) -> void:
 	if event.is_action_pressed("jump") and _remaining_jumps > 0:
 		_mesh.transition_to(_mesh.animations.FALL, false, true)
+		previous_state = self
 		_jump()
 
 	if event.is_action_released("jump") and _remaining_jumps == MAX_JUMPS - 1:
@@ -39,6 +52,13 @@ func input(event: InputEvent) -> void:
 func _handle_animation() -> void:
 	if _state_machine.state == self:
 		if _fighter.velocity.y < 2:
-			_mesh.transition_to(_mesh.animations.FALL)
+			if previous_state.name != "Attack":
+				_mesh.transition_to(_mesh.animations.FALL)
+				return
 		else:
 			_mesh.transition_to(_mesh.animations.JUMP)
+
+
+func exit() -> void:
+	super()
+	_hitbox.collision_shape.call_deferred("disabled", true)

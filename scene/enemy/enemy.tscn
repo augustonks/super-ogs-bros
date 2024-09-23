@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://corox2g3gguuy"]
+[gd_scene load_steps=23 format=3 uid="uid://corox2g3gguuy"]
 
 [ext_resource type="PackedScene" uid="uid://dsfhj2cjlw5jc" path="res://scene/fighter.tscn" id="1_topwr"]
 [ext_resource type="PackedScene" uid="uid://b34xyuw4ynwsx" path="res://assets/models/dummy/boneco-base-v2.glb" id="1_uiyes"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://7p17v621c06e" path="res://scene/fighter_animation_tree.tscn" id="5_68gl7"]
 [ext_resource type="Script" path="res://script/enemy/states/jump.gd" id="6_2m6qc"]
 [ext_resource type="Script" path="res://script/fighter/fighter_ai.gd" id="6_blxsg"]
+[ext_resource type="Script" path="res://script/enemy/states/rest.gd" id="7_pven5"]
 [ext_resource type="Script" path="res://script/enemy/states/attack.gd" id="7_v5n36"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_u8hh7"]
@@ -21,8 +22,8 @@ size = Vector3(0.5, 0.5, 0.5)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xndt2"]
 albedo_color = Color(1, 0.651653, 0.629567, 1)
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_roghy"]
-radius = 0.401
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dv1c6"]
+height = 3.04644
 
 [sub_resource type="Animation" id="Animation_6808m"]
 resource_name = "Attack1"
@@ -82,6 +83,46 @@ tracks/1/keys = {
 "values": [true, false, true]
 }
 
+[sub_resource type="Animation" id="Animation_ymu4v"]
+resource_name = "Kickair"
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hitbox:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.0173381, 0.624713, -0.0295808), Vector3(-0.0173381, 0.755142, 0.902597)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hitbox/CollisionShape3D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.06),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Hitbox/CollisionShape3D:shape:size")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.5, 0.5, 0.5), Vector3(0.5, 1.60254, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_xw0g7"]
 length = 0.001
 tracks/0/type = "value"
@@ -108,12 +149,79 @@ tracks/1/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Hitbox/CollisionShape3D:shape:size")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.5, 0.5, 0.5)]
+}
+
+[sub_resource type="Animation" id="Animation_0gvkq"]
+resource_name = "Walkattack"
+length = 0.333
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hitbox:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.0173381, 0.624713, -0.0295808), Vector3(-0.0173381, 0.624713, 0.756824)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hitbox/CollisionShape3D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.03, 0.33),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Hitbox/CollisionShape3D:shape:size")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.5, 0.5, 0.5), Vector3(1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Hitbox/CollisionShape3D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.15),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.232849, -0.333252)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_j3dot"]
 _data = {
 "Attack1": SubResource("Animation_6808m"),
 "Attack2": SubResource("Animation_qyrrw"),
-"RESET": SubResource("Animation_xw0g7")
+"Kickair": SubResource("Animation_ymu4v"),
+"RESET": SubResource("Animation_xw0g7"),
+"Walkattack": SubResource("Animation_0gvkq")
 }
 
 [node name="Enemy" instance=ExtResource("1_topwr")]
@@ -127,6 +235,7 @@ shape = SubResource("BoxShape3D_u8hh7")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.297224, 1.26151, -0.217551)
 
 [node name="CollisionShape3D" parent="Hitbox" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.232849, -0.333252)
 shape = SubResource("BoxShape3D_isdwu")
 
 [node name="CollisionShape3D" parent="Hurtbox" index="0"]
@@ -149,11 +258,15 @@ script = ExtResource("4_tdq3d")
 script = ExtResource("6_2m6qc")
 _wall_check = NodePath("../../../FighterAI/WallCheck")
 
+[node name="Rest" type="Node" parent="StateMachine/Move" index="3"]
+script = ExtResource("7_pven5")
+
 [node name="Struck" parent="StateMachine" index="1"]
 next_state = "Move/Idle"
 
-[node name="Attack" type="Node" parent="StateMachine" index="2"]
+[node name="Attack" type="Node" parent="StateMachine" index="2" node_paths=PackedStringArray("_hitbox")]
 script = ExtResource("7_v5n36")
+_hitbox = NodePath("../../Hitbox")
 
 [node name="AttackDuration" type="Timer" parent="StateMachine/Attack" index="0"]
 wait_time = 0.32
@@ -165,38 +278,40 @@ animation_tree = NodePath("../AnimationTree")
 _tracker = NodePath("../Tracker")
 
 [node name="Skeleton3D" parent="Mesh/Armature" index="0"]
-bones/1/position = Vector3(6.10523e-09, 0.495181, 0.00266574)
+bones/1/position = Vector3(1.47371e-09, 0.657678, 0.00266573)
 bones/1/rotation = Quaternion(0.0598809, 1.18995e-07, 7.13835e-09, 0.998206)
 bones/2/rotation = Quaternion(-0.0552952, 4.64506e-14, -1.31834e-08, 0.99847)
 bones/2/scale = Vector3(1, 1, 1)
 bones/3/rotation = Quaternion(-0.0218608, -2.38362e-07, 2.22098e-15, 0.999761)
 bones/4/rotation = Quaternion(-0.044071, -8.93765e-14, 1.05073e-08, 0.999028)
-bones/5/rotation = Quaternion(0.0254906, 3.2305e-09, -3.07652e-08, 0.999675)
+bones/5/rotation = Quaternion(0.104719, 7.79572e-10, -3.09245e-08, 0.994502)
 bones/5/scale = Vector3(1, 1, 1)
 bones/6/rotation = Quaternion(0.0270065, 0.00424482, -0.376636, 0.925958)
-bones/7/rotation = Quaternion(-0.46737, -0.43574, -0.373355, 0.672534)
-bones/8/rotation = Quaternion(0.858986, 6.74536e-05, 0.066024, 0.507724)
+bones/7/rotation = Quaternion(-0.166559, 0.265063, -0.752448, 0.579501)
+bones/8/rotation = Quaternion(0.619274, 0.000104114, 0.0475991, 0.783731)
 bones/9/rotation = Quaternion(0.0270065, -0.00424444, 0.376636, 0.925958)
-bones/10/rotation = Quaternion(-0.46737, 0.43574, 0.373355, 0.672534)
-bones/11/rotation = Quaternion(0.858986, -6.75181e-05, -0.0660238, 0.507724)
-bones/12/position = Vector3(0.439652, 0.386745, -0.0315935)
-bones/12/rotation = Quaternion(-0.0212311, -0.0325615, -0.244028, 0.968989)
-bones/14/position = Vector3(-0.439652, 0.386746, -0.0315933)
-bones/14/rotation = Quaternion(-0.0212311, 0.0325618, 0.244028, 0.968989)
+bones/10/rotation = Quaternion(-0.166559, -0.265063, 0.752448, 0.579501)
+bones/11/rotation = Quaternion(0.619274, -0.000104214, -0.0475989, 0.783731)
+bones/12/position = Vector3(0.415566, -0.0465387, -0.0465645)
+bones/12/rotation = Quaternion(-0.03491, -0.00996313, -0.585474, 0.809878)
+bones/12/scale = Vector3(1, 1, 1)
+bones/14/position = Vector3(-0.415566, -0.0465386, -0.0465643)
+bones/14/rotation = Quaternion(-0.0349098, 0.00996331, 0.585474, 0.809878)
+bones/14/scale = Vector3(1, 1, 1)
 bones/15/rotation = Quaternion(-0.000891735, 0.00838936, 0.707106, 0.707057)
-bones/16/position = Vector3(0.145558, 0.480599, 0.0792558)
+bones/16/position = Vector3(0.152199, 0.332442, 0.138866)
 bones/16/rotation = Quaternion(-0.502695, 0.496892, 0.514357, -0.485626)
-bones/17/position = Vector3(-0.145558, 0.480599, 0.0792559)
+bones/17/position = Vector3(-0.152199, 0.332442, 0.138866)
 bones/17/rotation = Quaternion(0.502696, 0.496892, 0.514357, 0.485626)
 bones/18/position = Vector3(0.115276, 0.00714147, 0.0126171)
-bones/18/rotation = Quaternion(-0.589796, 0.122032, 0.663181, -0.444343)
+bones/18/rotation = Quaternion(-0.657076, 0.07556, 0.708953, -0.244802)
 bones/18/scale = Vector3(0.999988, 1, 0.999967)
-bones/19/rotation = Quaternion(0.312215, 0.015378, -0.658356, 0.684728)
+bones/19/rotation = Quaternion(0.162063, 0.0207827, -0.341739, 0.925483)
 bones/19/scale = Vector3(0.999999, 1, 1)
 bones/20/position = Vector3(-0.115276, 0.00714159, 0.012617)
-bones/20/rotation = Quaternion(0.589796, 0.122032, 0.663181, 0.444343)
+bones/20/rotation = Quaternion(0.657075, 0.0755599, 0.708953, 0.244802)
 bones/20/scale = Vector3(0.999988, 1, 0.999967)
-bones/21/rotation = Quaternion(0.312215, -0.0153778, 0.658356, 0.684729)
+bones/21/rotation = Quaternion(0.162063, -0.0207824, 0.341738, 0.925483)
 bones/21/scale = Vector3(0.999999, 1, 1)
 bones/22/position = Vector3(0.161352, 0.0405048, 0.00846978)
 bones/23/rotation = Quaternion(0.94193, -0.0319537, 0.322367, 0.088467)
@@ -228,8 +343,8 @@ collision_layer = 8
 collision_mask = 16
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FighterAI/AttackRadius" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.924448, 0)
-shape = SubResource("SphereShape3D_roghy")
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.924448, 0)
+shape = SubResource("CapsuleShape3D_dv1c6")
 
 [node name="Debug" type="Label" parent="." index="8"]
 offset_left = 751.0

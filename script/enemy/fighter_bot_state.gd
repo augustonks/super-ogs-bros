@@ -6,3 +6,7 @@ extends FighterState
 
 var _is_player_next := false
 var _current_direction: int = -1
+
+
+func physics_process(delta: float) -> void:
+	_fighter.current_direction = _current_direction
