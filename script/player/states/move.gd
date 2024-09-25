@@ -14,7 +14,7 @@ func _handle_movement(delta: float, can_move: bool, can_jump: bool, rotate_mesh:
 	if Input.is_action_just_pressed("attack"):
 		if sub_state.name == "Air" and sub_state.previous_state.name == "Attack":
 			return
-		_state_machine.transition_to("Move/Attack")
+		_state_machine.transition_to("Attack")
 
 	if can_jump:
 		if Input.is_action_just_pressed("jump") and _fighter.is_on_floor():

@@ -1,6 +1,7 @@
 class_name Fighter
 extends CharacterBody3D
 
+@onready var move_state: FighterState = $StateMachine/Move
 @onready var mesh: FighterMesh = $Mesh
 @onready var _hitbox: Hitbox = $Hitbox
 @onready var _hurtbox: Hurtbox = $Hurtbox

@@ -2,6 +2,7 @@ extends PlayerState
 
 @onready var _attack_duration: Timer = $AttackDuration
 @export var _hitbox: Hitbox
+@export var _move_state: PlayerState
 
 var _given_combos := 0
 var _attack_next := false
@@ -19,8 +20,9 @@ enum attack_states {IDLE_ATTACK, WALK_ATTACK, KICK_AIR}
 
 func enter(_params := []) -> void:
 	super()
+	_fighter.rotation_degrees.y = _fighter.current_direction * 90
 	if _fighter.is_on_floor():
-		if abs(_fighter.velocity.x) > .5:
+		if (abs(_input_axis) > 0 and abs(_fighter.velocity.x) > 7) and _move_state.is_accelerating:
 			_attack_state = attack_states.WALK_ATTACK
 			_walk_attack()
 		else:
@@ -30,7 +32,6 @@ func enter(_params := []) -> void:
 		_attack_state = attack_states.KICK_AIR
 		_kick_air()
 	_hitbox.current_attack_type = attack_states.keys()[_attack_state].to_lower()
-
 
 
 func physics_process(delta: float) -> void:
@@ -44,11 +45,15 @@ func physics_process(delta: float) -> void:
 		if _fighter.is_on_floor():
 			_state_machine.transition_to("Move/Idle")
 
+	if _attack_state == attack_states.IDLE_ATTACK:
+		_fighter.velocity.x = move_toward(_fighter.velocity.x, 0, 25 * delta)
+
 	_fighter.move_and_slide()
 
 
 func _idle_attack() -> void:
-	_fighter.velocity = Vector3.ZERO
+	if _fighter.velocity.x != 0:
+		_fighter.velocity.x = _fighter.current_direction * IDLE_PUNCH_IMPULSE
 	match _given_combos:
 		0:
 			_mesh.transition_to(_mesh.animations.ATTACK1, true)

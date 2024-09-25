@@ -39,5 +39,5 @@ func transition_to(state_path: String, reset_state: bool = false, params := []) 
 	
 	new_state.previous_state = state
 	state = new_state
-	state.enter(params)
 	transitioning = false
+	state.enter(params)

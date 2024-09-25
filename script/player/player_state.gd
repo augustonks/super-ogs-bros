@@ -11,7 +11,9 @@ func _ready() -> void:
 func physics_process(delta: float) -> void:
 	super(delta)
 	_input_axis = _get_input_axis()
-	if _input_axis != 0:
+	if (_input_axis != 0 
+	and not (_state_machine.state.name == "Air"
+	and _state_machine.state.previous_state.name == "Attack")):
 		_fighter.current_direction = _input_axis
 
 

@@ -61,4 +61,4 @@ func _handle_animation() -> void:
 
 func exit() -> void:
 	super()
-	_hitbox.collision_shape.call_deferred("disabled", true)
+	_hitbox.collision_shape.disabled = true

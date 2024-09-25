@@ -1,11 +1,11 @@
-[gd_scene load_steps=23 format=3 uid="uid://corox2g3gguuy"]
+[gd_scene load_steps=24 format=3 uid="uid://corox2g3gguuy"]
 
 [ext_resource type="PackedScene" uid="uid://dsfhj2cjlw5jc" path="res://scene/fighter.tscn" id="1_topwr"]
 [ext_resource type="PackedScene" uid="uid://b34xyuw4ynwsx" path="res://assets/models/dummy/boneco-base-v2.glb" id="1_uiyes"]
 [ext_resource type="Script" path="res://script/enemy/states/move.gd" id="2_bsmho"]
 [ext_resource type="Script" path="res://script/fighter/fighter_mesh.gd" id="2_cxkrs"]
 [ext_resource type="Script" path="res://script/enemy/fighter_bot.gd" id="2_eewm3"]
-[ext_resource type="Script" path="res://script/fighter/shared_states/idle.gd" id="2_yuwrk"]
+[ext_resource type="Script" path="res://script/enemy/states/idle.gd" id="4_nodi7"]
 [ext_resource type="Script" path="res://script/enemy/states/walk.gd" id="4_tdq3d"]
 [ext_resource type="PackedScene" uid="uid://7p17v621c06e" path="res://scene/fighter_animation_tree.tscn" id="5_68gl7"]
 [ext_resource type="Script" path="res://script/enemy/states/jump.gd" id="6_2m6qc"]
@@ -24,6 +24,9 @@ albedo_color = Color(1, 0.651653, 0.629567, 1)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dv1c6"]
 height = 3.04644
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_p4exr"]
+radius = 15.0
 
 [sub_resource type="Animation" id="Animation_6808m"]
 resource_name = "Attack1"
@@ -249,20 +252,18 @@ state = NodePath("Move/Idle")
 script = ExtResource("2_bsmho")
 
 [node name="Idle" type="Node" parent="StateMachine/Move" index="0"]
-script = ExtResource("2_yuwrk")
+script = ExtResource("4_nodi7")
 
 [node name="Walk" type="Node" parent="StateMachine/Move" index="1"]
 script = ExtResource("4_tdq3d")
 
-[node name="Air" type="Node" parent="StateMachine/Move" index="2" node_paths=PackedStringArray("_wall_check")]
+[node name="Air" type="Node" parent="StateMachine/Move" index="2" node_paths=PackedStringArray("_wall_check", "_hitbox")]
 script = ExtResource("6_2m6qc")
 _wall_check = NodePath("../../../FighterAI/WallCheck")
+_hitbox = NodePath("../../../Hitbox")
 
 [node name="Rest" type="Node" parent="StateMachine/Move" index="3"]
 script = ExtResource("7_pven5")
-
-[node name="Struck" parent="StateMachine" index="1"]
-next_state = "Move/Idle"
 
 [node name="Attack" type="Node" parent="StateMachine" index="2" node_paths=PackedStringArray("_hitbox")]
 script = ExtResource("7_v5n36")
@@ -278,40 +279,40 @@ animation_tree = NodePath("../AnimationTree")
 _tracker = NodePath("../Tracker")
 
 [node name="Skeleton3D" parent="Mesh/Armature" index="0"]
-bones/1/position = Vector3(1.47371e-09, 0.657678, 0.00266573)
+bones/1/position = Vector3(4.64931e-09, 0.546262, 0.00266574)
 bones/1/rotation = Quaternion(0.0598809, 1.18995e-07, 7.13835e-09, 0.998206)
 bones/2/rotation = Quaternion(-0.0552952, 4.64506e-14, -1.31834e-08, 0.99847)
 bones/2/scale = Vector3(1, 1, 1)
 bones/3/rotation = Quaternion(-0.0218608, -2.38362e-07, 2.22098e-15, 0.999761)
 bones/4/rotation = Quaternion(-0.044071, -8.93765e-14, 1.05073e-08, 0.999028)
-bones/5/rotation = Quaternion(0.104719, 7.79572e-10, -3.09245e-08, 0.994502)
+bones/5/rotation = Quaternion(0.0504388, 2.46147e-09, -3.08363e-08, 0.998727)
 bones/5/scale = Vector3(1, 1, 1)
 bones/6/rotation = Quaternion(0.0270065, 0.00424482, -0.376636, 0.925958)
-bones/7/rotation = Quaternion(-0.166559, 0.265063, -0.752448, 0.579501)
-bones/8/rotation = Quaternion(0.619274, 0.000104114, 0.0475991, 0.783731)
+bones/7/rotation = Quaternion(-0.543349, -0.197806, -0.54215, 0.609687)
+bones/8/rotation = Quaternion(0.879579, 6.25697e-05, 0.0676068, 0.470925)
 bones/9/rotation = Quaternion(0.0270065, -0.00424444, 0.376636, 0.925958)
-bones/10/rotation = Quaternion(-0.166559, -0.265063, 0.752448, 0.579501)
-bones/11/rotation = Quaternion(0.619274, -0.000104214, -0.0475989, 0.783731)
-bones/12/position = Vector3(0.415566, -0.0465387, -0.0465645)
-bones/12/rotation = Quaternion(-0.03491, -0.00996313, -0.585474, 0.809878)
+bones/10/rotation = Quaternion(-0.543349, 0.197806, 0.54215, 0.609687)
+bones/11/rotation = Quaternion(0.879579, -6.26368e-05, -0.0676066, 0.470925)
+bones/12/position = Vector3(0.432081, 0.250542, -0.0362996)
+bones/12/rotation = Quaternion(-0.0259679, -0.0258045, -0.357749, 0.9331)
 bones/12/scale = Vector3(1, 1, 1)
-bones/14/position = Vector3(-0.415566, -0.0465386, -0.0465643)
-bones/14/rotation = Quaternion(-0.0349098, 0.00996331, 0.585474, 0.809878)
+bones/14/position = Vector3(-0.432081, 0.250542, -0.0362994)
+bones/14/rotation = Quaternion(-0.0259678, 0.0258047, 0.357749, 0.9331)
 bones/14/scale = Vector3(1, 1, 1)
 bones/15/rotation = Quaternion(-0.000891735, 0.00838936, 0.707106, 0.707057)
-bones/16/position = Vector3(0.152199, 0.332442, 0.138866)
+bones/16/position = Vector3(0.147646, 0.434026, 0.0979942)
 bones/16/rotation = Quaternion(-0.502695, 0.496892, 0.514357, -0.485626)
-bones/17/position = Vector3(-0.152199, 0.332442, 0.138866)
+bones/17/position = Vector3(-0.147646, 0.434026, 0.0979943)
 bones/17/rotation = Quaternion(0.502696, 0.496892, 0.514357, 0.485626)
 bones/18/position = Vector3(0.115276, 0.00714147, 0.0126171)
-bones/18/rotation = Quaternion(-0.657076, 0.07556, 0.708953, -0.244802)
+bones/18/rotation = Quaternion(-0.611596, 0.113317, 0.677181, -0.39311)
 bones/18/scale = Vector3(0.999988, 1, 0.999967)
-bones/19/rotation = Quaternion(0.162063, 0.0207827, -0.341739, 0.925483)
+bones/19/rotation = Quaternion(0.277989, 0.0170868, -0.586183, 0.760802)
 bones/19/scale = Vector3(0.999999, 1, 1)
 bones/20/position = Vector3(-0.115276, 0.00714159, 0.012617)
-bones/20/rotation = Quaternion(0.657075, 0.0755599, 0.708953, 0.244802)
+bones/20/rotation = Quaternion(0.611596, 0.113317, 0.677181, 0.39311)
 bones/20/scale = Vector3(0.999988, 1, 0.999967)
-bones/21/rotation = Quaternion(0.162063, -0.0207824, 0.341738, 0.925483)
+bones/21/rotation = Quaternion(0.277989, -0.0170866, 0.586183, 0.760802)
 bones/21/scale = Vector3(0.999999, 1, 1)
 bones/22/position = Vector3(0.161352, 0.0405048, 0.00846978)
 bones/23/rotation = Quaternion(0.94193, -0.0319537, 0.322367, 0.088467)
@@ -338,13 +339,23 @@ _move_state = NodePath("../StateMachine/Move")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.154431, 0)
 target_position = Vector3(0, 0, 1.46)
 
-[node name="AttackRadius" type="Area3D" parent="FighterAI" index="1"]
+[node name="FloorCheck" type="RayCast3D" parent="FighterAI" index="1"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.122109, 0.460092)
+target_position = Vector3(0, 0, 15)
+debug_shape_thickness = 5
+
+[node name="AttackRadius" type="Area3D" parent="FighterAI" index="2"]
 collision_layer = 8
 collision_mask = 16
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FighterAI/AttackRadius" index="0"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.924448, 0)
 shape = SubResource("CapsuleShape3D_dv1c6")
+
+[node name="PlayerRadius" type="Area3D" parent="FighterAI" index="3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FighterAI/PlayerRadius" index="0"]
+shape = SubResource("SphereShape3D_p4exr")
 
 [node name="Debug" type="Label" parent="." index="8"]
 offset_left = 751.0

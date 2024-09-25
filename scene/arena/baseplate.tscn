@@ -1,5 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://1eylassd1udl"]
+[gd_scene load_steps=11 format=3 uid="uid://1eylassd1udl"]
 
+[ext_resource type="Shader" path="res://assets/shader/outline.gdshader" id="1_bjsgg"]
 [ext_resource type="Script" path="res://script/camera/player_camera.gd" id="2_7nj4w"]
 [ext_resource type="Texture2D" uid="uid://b11w7ajiq2rj" path="res://assets/images/green_plains.jpg" id="3_faw4e"]
 [ext_resource type="PackedScene" uid="uid://corox2g3gguuy" path="res://scene/enemy/enemy.tscn" id="4_o3n8v"]
@@ -33,21 +34,31 @@ adjustment_brightness = 1.07
 adjustment_contrast = 1.29
 adjustment_saturation = 2.16
 
+[sub_resource type="QuadMesh" id="QuadMesh_r7ns7"]
+size = Vector2(2.265, 1.81)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2dj4h"]
+render_priority = 0
+shader = ExtResource("1_bjsgg")
+shader_parameter/outline_thickness = 1.6
+shader_parameter/step_threshold = 1.0
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+
 [node name="Node3D" type="Node3D"]
 
 [node name="Blocks" type="Node3D" parent="."]
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Blocks"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.543511, -8.25159, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.544, -8, 0)
 material_override = SubResource("StandardMaterial3D_xg1pe")
 use_collision = true
-size = Vector3(15.1407, 16.503, 1.59)
+size = Vector3(15.141, 16, 1.59)
 
 [node name="CSGBox3D10" type="CSGBox3D" parent="Blocks"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.4221, -8.25159, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.422, -8, 0)
 material_override = SubResource("StandardMaterial3D_xg1pe")
 use_collision = true
-size = Vector3(8, 16.503, 1.59)
+size = Vector3(8, 16, 1.59)
 
 [node name="CSGBox3D16" type="CSGBox3D" parent="Blocks"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.8537, -0.421672, 0)
@@ -89,7 +100,7 @@ light_bake_mode = 1
 shadow_enabled = true
 
 [node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("_fighter1", "_fighter2")]
-transform = Transform3D(1, 0, 0, 0, 0.997916, 0.0645323, 0, -0.0645323, 0.997916, 0, 2.71499, 10.9858)
+transform = Transform3D(1, 0, 0, 0, 0.997916, 0.0645323, 0, -0.0645323, 0.997916, -4.4, 2.71499, 24.6795)
 current = true
 size = 7.803
 script = ExtResource("2_7nj4w")
@@ -101,8 +112,13 @@ transform = Transform3D(2.75, 0, 0, 0, 2.75, 0, 0, 0, 2.75, 0, -0.298614, -17.95
 modulate = Color(0.0928108, 0.556777, 1, 1)
 texture = ExtResource("3_faw4e")
 
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0462523, -0.715235)
+mesh = SubResource("QuadMesh_r7ns7")
+surface_material_override/0 = SubResource("ShaderMaterial_2dj4h")
+
 [node name="Player" parent="." instance=ExtResource("4_umlni")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.29807, -0.0301554, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.29807, -0.0301554, 0)
 
 [node name="Enemy" parent="." instance=ExtResource("4_o3n8v")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.52618, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.474, 4, 0)

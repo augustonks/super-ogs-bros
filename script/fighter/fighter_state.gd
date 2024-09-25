@@ -5,7 +5,7 @@ var _fighter: Fighter
 var _mesh: FighterMesh
 
 var current_speed = MIN_RUN_SPEED
-var _is_accelerating := false
+var is_accelerating := false
 var _acceleration_timer
 var _previous_direction: int
 var _knockback_force: Vector3 = Vector3.ZERO
@@ -24,7 +24,8 @@ const FRICTION := 50
 const JUMP_VELOCITY := 11.0
 const FALL_MULTIPLIER := 1.25
 const PUNCH_KNOCKBACK_FORCE := 10.0
-const MAX_JUMPS: int = 10
+const IDLE_PUNCH_IMPULSE := 10.0
+const MAX_JUMPS: int = 2
 const _JUMP_CANCEL_FACTOR: float = 0.7
 const FRICTION_CONSTANT: float = 60.0
 const JUMP_DELAY: float = 0.01
@@ -71,7 +72,7 @@ func _update_velocity(delta: float, direction: int) -> void:
 	if direction:
 		# Caso haja a direçao mude repentinamente, lutador nao perde velocidade
 		if direction != _previous_direction and direction != 0 and _fighter.velocity.x != 0:
-			if _fighter.is_on_floor() and _is_accelerating:
+			if _fighter.is_on_floor() and is_accelerating and current_speed != WALK_SPEED:
 				_fighter.velocity.x = direction * current_speed * RUN_BOOST
 			else:
 				_fighter.velocity.x = direction * current_speed 
@@ -84,21 +85,24 @@ func _update_velocity(delta: float, direction: int) -> void:
 				_fighter.velocity.x = direction * current_speed
 
 		# Começa a acelerar depois do boost de velocidade inicial
-		if _get_difference_between(_fighter.velocity.x, MIN_RUN_SPEED) < .5 and not _is_accelerating:
-			_is_accelerating = true
-			_acceleration_timer = get_tree().create_timer(.05)
+		if current_speed != WALK_SPEED:
+			if _get_difference_between(_fighter.velocity.x, MIN_RUN_SPEED) < .5 and not is_accelerating:
+				is_accelerating = true
+				_acceleration_timer = get_tree().create_timer(.05)
 
-		if (_is_accelerating and _acceleration_timer.time_left == 0):
-				_fighter.velocity.x = move_toward(_fighter.velocity.x, direction * MAX_RUN_SPEED, MAX_SPEED_ACCELERATION * delta)
-		# Idependentemente de como a movimentaçao começou (apos o flip ou nao), a velocidade transiciona
-		# de volta para o padrao
+			if (is_accelerating and _acceleration_timer.time_left == 0):
+					_fighter.velocity.x = move_toward(_fighter.velocity.x, direction * MAX_RUN_SPEED, MAX_SPEED_ACCELERATION * delta)
+			# Idependentemente de como a movimentaçao começou (apos o flip ou nao), a velocidade transiciona
+			# de volta para o padrao
+			else:
+				_fighter.velocity.x = move_toward(_fighter.velocity.x, direction * current_speed, BOOST_FRICTION * delta)
 		else:
-			_fighter.velocity.x = move_toward(_fighter.velocity.x, direction * current_speed, BOOST_FRICTION * delta)
+			_fighter.velocity.x = move_toward(_fighter.velocity.x, direction * current_speed, BOOST_FRICTION * 2 * delta)
 
 	else:
 		_fighter.velocity.x = move_toward(_fighter.velocity.x, 0, FRICTION * delta)
 		if abs(_fighter.velocity.x) <= .1:
-			_is_accelerating = false
+			is_accelerating = false
 
 
 func _jump(factor := 1.0) -> void:
@@ -108,8 +112,9 @@ func _jump(factor := 1.0) -> void:
 
 func _rotate_mesh(delta: float, direction_x: float) -> void:
 	if abs(direction_x) > .1:
-		var tween = get_tree().create_tween()
-		tween.tween_property(_fighter, "rotation_degrees:y", direction_x * 90, .1)
+		#var tween = get_tree().create_tween()
+		#tween.tween_property(_fighter, "rotation_degrees:y", direction_x * 90, .1)
+		_fighter.rotation_degrees.y = move_toward(_fighter.rotation_degrees.y, direction_x * 90, 1000 * delta)
 		_mesh.direction = direction_x
 
 

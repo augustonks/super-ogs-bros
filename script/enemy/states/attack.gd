@@ -29,7 +29,6 @@ func enter(_params := []) -> void:
 		_attack_state = attack_states.KICK_AIR
 		_kick_air()
 	_hitbox.current_attack_type = attack_states.keys()[_attack_state].to_lower()
-	print(_attack_state)
 
 
 func physics_process(delta: float) -> void:
@@ -67,6 +66,7 @@ func _idle_attack() -> void:
 
 func _walk_attack() -> void:
 	_mesh.transition_to(_mesh.animations.WALKATTACK, true)
+	print_debug(_fighter.current_direction)
 	_fighter.velocity.x = 11 * _fighter.current_direction
 	_attack_duration.start(_attacks_time["walk"])
 	await _attack_duration.timeout

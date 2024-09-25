@@ -4,12 +4,13 @@ extends FighterBotState
 func enter(params := []) -> void:
 	super()
 	_mesh.transition_to(_mesh.animations.IDLE)
-	_acceleration_timer = get_tree().create_timer(1)
+
 
 
 func physics_process(delta: float) -> void:
-	super(delta)
 	_parent.physics_process(delta)
+
+	_rotate_mesh(delta, _fighter.current_direction)
 	if not processing:
 		return
 	

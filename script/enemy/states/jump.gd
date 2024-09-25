@@ -1,6 +1,7 @@
 extends FighterBotState
 
 @export var _wall_check: RayCast3D
+@export var _hitbox: Hitbox
 
 func enter(params := []) -> void:
 	super()
@@ -24,7 +25,7 @@ func physics_process(delta: float) -> void:
 			if _wall_check.is_colliding():
 				_state_machine.transition_to("Move/Idle") 
 
-
+	_parent.handle_movement(delta)
 	_parent.physics_process(delta)
 
 
@@ -34,3 +35,8 @@ func _handle_animation() -> void:
 			_mesh.transition_to(_mesh.animations.FALL)
 		else:
 			_mesh.transition_to(_mesh.animations.JUMP)
+
+
+func exit() -> void:
+	super()
+	_hitbox.collision_shape.disabled = true

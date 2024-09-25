@@ -13,7 +13,8 @@ func _ready() -> void:
 
 
 func enter(_params := []) -> void:
-	#print(name, " entered!")
+	#if owner.name == "Player":
+		#print(name, " entered!")
 	processing = true
 	if _parent:
 		_parent.sub_state = self

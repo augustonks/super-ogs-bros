@@ -10,4 +10,5 @@ func _process(delta: float) -> void:
 	var velocity_y = String("%0.2f" % velocity.y)
 	debug.text = str(
 		"\n",
+		"State: ", _state_machine.state.name, "\n",
 		"Velocity X: ", velocity_x, " Y: ", velocity_y)
