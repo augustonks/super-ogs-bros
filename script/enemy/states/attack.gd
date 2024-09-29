@@ -3,6 +3,7 @@ extends FighterBotState
 @onready var _attack_duration: Timer = $AttackDuration
 @export var _hitbox: Hitbox
 
+var _attack_disable_timer := Timer.new()
 var _given_combos := 0
 var _attack_next := false
 var _attack_state: int
@@ -12,12 +13,23 @@ var _attacks_time := {
 	"kickair": .35,
 }
 
+var can_attack := true
+var can_attack_on_exit := true
+
 const MAX_COMBOS := 2
 
 enum attack_states {IDLE_ATTACK, WALK_ATTACK, KICK_AIR}
 
+
+func _ready() -> void:
+	super()
+	add_child(_attack_disable_timer)
+	_attack_disable_timer.one_shot = true
+
+
 func enter(_params := []) -> void:
 	super()
+	can_attack = false
 	if _fighter.is_on_floor():
 		if abs(_fighter.velocity.x) > .5:
 			_attack_state = attack_states.WALK_ATTACK
@@ -31,6 +43,15 @@ func enter(_params := []) -> void:
 	_hitbox.current_attack_type = attack_states.keys()[_attack_state].to_lower()
 
 
+func _process(_delta: float) -> void:
+	if not can_attack_on_exit:
+		if _attack_disable_timer.is_stopped():
+			_attack_disable_timer.start(.5)
+			await _attack_disable_timer.timeout
+			can_attack = true
+			can_attack_on_exit = true
+
+
 func physics_process(delta: float) -> void:
 	if _fighter_ai.is_player_near and _attack_state == attack_states.IDLE_ATTACK:
 		_attack_next = true
@@ -40,6 +61,7 @@ func physics_process(delta: float) -> void:
 		_fighter.velocity.x = move_toward(_fighter.velocity.x, 3.0 * _fighter.current_direction, 10 * delta)
 		if _fighter.is_on_floor():
 			_state_machine.transition_to("Move/Idle")
+			return
 
 	_fighter.move_and_slide()
 
@@ -66,7 +88,6 @@ func _idle_attack() -> void:
 
 func _walk_attack() -> void:
 	_mesh.transition_to(_mesh.animations.WALKATTACK, true)
-	print_debug(_fighter.current_direction)
 	_fighter.velocity.x = 11 * _fighter.current_direction
 	_attack_duration.start(_attacks_time["walk"])
 	await _attack_duration.timeout
@@ -91,3 +112,7 @@ func exit() -> void:
 	super()
 	_given_combos = 0
 	_fighter.velocity.x = 0
+	_attack_disable_timer.start()
+	await _attack_disable_timer.timeout
+	if can_attack_on_exit:
+		can_attack = true

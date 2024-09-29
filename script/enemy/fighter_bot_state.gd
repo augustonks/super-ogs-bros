@@ -8,5 +8,5 @@ var _is_player_next := false
 var current_direction: int = -1
 
 
-func physics_process(delta: float) -> void:
+func physics_process(_delta: float) -> void:
 	_fighter.current_direction = current_direction

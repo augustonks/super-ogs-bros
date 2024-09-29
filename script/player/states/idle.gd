@@ -1,7 +1,7 @@
 extends FighterBotState
 
 
-func enter(params := []) -> void:
+func enter(_params := []) -> void:
 	super()
 	_mesh.transition_to(_mesh.animations.IDLE)
 

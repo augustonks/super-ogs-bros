@@ -1,7 +1,7 @@
 extends FighterStruckState
 
 
-func enter(params := []) -> void:
+func enter(_params := []) -> void:
 	super()
 	_mesh.transition_to(_mesh.animations.IDLEHIT, false, true)
 	_hit_knockback(hitbox.current_attack_type)

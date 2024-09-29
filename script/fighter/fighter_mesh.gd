@@ -10,7 +10,7 @@ var direction: int
 
 enum animations {
 	IDLE, WALK, JUMP, RUN, FALL, LANDHARD, ATTACK1, ATTACK2,
-	WALKATTACK, JUMPATTACK, KICKAIR, STUMBLE, IDLEHIT, AIRHIT}
+	WALKATTACK, JUMPATTACK, KICKAIR, STUMBLE, IDLEHIT, AIRHIT, DODGE}
 
 func transition_to(animation_id: int, has_tracker: bool = false, reset: bool = false) -> void:
 	var animation_string = animations.keys()[animation_id].capitalize().replace(" ", "")

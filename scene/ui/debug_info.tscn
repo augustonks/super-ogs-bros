@@ -1,0 +1,132 @@
+[gd_scene load_steps=4 format=3 uid="uid://dtrhusni4ta7y"]
+
+[ext_resource type="Script" path="res://script/ui/debug_info.gd" id="1_mndx6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ecye3"]
+bg_color = Color(0.07196, 0.0266, 0.14, 0.541176)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iq4ap"]
+bg_color = Color(0.142385, 0.158455, 0.273367, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_size = 10
+
+[node name="DebugInfo" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_right = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mndx6")
+
+[node name="PlayerInfo" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_bottom = 1.0
+offset_right = 465.0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 24
+text = "DEBUG INFO"
+
+[node name="BotInfo" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -461.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 24
+text = "DEBUG INFO"
+horizontal_alignment = 2
+
+[node name="HelpText" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -105.5
+offset_right = 105.5
+offset_bottom = 34.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 24
+text = "Press TAB for help"
+horizontal_alignment = 1
+
+[node name="HelpWindow" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel2" type="Panel" parent="HelpWindow"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -22.0
+offset_right = 21.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ecye3")
+
+[node name="Panel" type="Panel" parent="HelpWindow"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -256.0
+offset_top = -256.0
+offset_right = 256.0
+offset_bottom = 256.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_iq4ap")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HelpWindow/Panel"]
+clip_contents = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_right = 0.95
+anchor_bottom = 1.0
+offset_left = 0.4
+offset_top = 15.0
+offset_right = 0.600006
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 21
+bbcode_enabled = true
+text = "[color=orange][wave amp=50.0 freq=5.0 connected=1]CONTROLS!!![/wave][/color]
+
+WASD: Move
+Space: Jump
+K/LeftClick: Attack1 (On floor)
+M/RightClick: Attack2 (On floor)
+O/Q: Dodge
+[color=orange][wave amp=50.0 freq=5.0 connected=1]--------------------------------------------------------[/wave][/color]
+
+Press END to reset scene.
+Press F3 to show/hide debug info
+[color=orange].[/color]
+[tornado radius=5.0 freq=1.0 connected=1](I know the game still has a lot of bugs, but they'll be fixed soon!)[/tornado]
+[color=orange].[/color]
+[color=orange]Super OGS Bros - Legusto64[/color]"
+autowrap_mode = 2

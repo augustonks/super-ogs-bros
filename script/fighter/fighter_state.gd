@@ -11,7 +11,6 @@ var _previous_direction: int
 var _knockback_force: Vector3 = Vector3.ZERO
 var _is_knockbacking: bool = false
 var _knockback_started: bool = false
-var _apply_impulse_once: bool = false
 var _remaining_jumps: int = MAX_JUMPS
 
 const WALK_SPEED := 2.5
@@ -29,8 +28,6 @@ const MAX_JUMPS: int = 2
 const _JUMP_CANCEL_FACTOR: float = 0.7
 const FRICTION_CONSTANT: float = 60.0
 const JUMP_DELAY: float = 0.01
-
-signal knockback_finished
 
 
 func _ready() -> void:
@@ -61,7 +58,6 @@ func _apply_impulse(delta:float) -> void:
 	if _knockback_force.length() < 0.1: 
 		_knockback_force = Vector3.ZERO
 		_is_knockbacking = false
-		emit_signal("knockback_finished")
 
 
 func _update_velocity(delta: float, direction: int) -> void:
@@ -111,6 +107,8 @@ func _jump(factor := 1.0) -> void:
 
 
 func _rotate_mesh(delta: float, direction_x: float) -> void:
+	if direction_x == 0:
+		direction_x = _previous_direction
 	if abs(direction_x) > .1:
 		#var tween = get_tree().create_tween()
 		#tween.tween_property(_fighter, "rotation_degrees:y", direction_x * 90, .1)

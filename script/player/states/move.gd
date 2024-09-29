@@ -11,10 +11,15 @@ func physics_process(delta: float, can_move := true, can_jump := true, rotate_me
 func _handle_movement(delta: float, can_move: bool, can_jump: bool, rotate_mesh: bool) -> void:
 	_update_speed()
 
-	if Input.is_action_just_pressed("attack"):
+	if (Input.is_action_just_pressed("attack1")
+	or Input.is_action_just_pressed("attack2")):
 		if sub_state.name == "Air" and sub_state.previous_state.name == "Attack":
 			return
+
 		_state_machine.transition_to("Attack")
+
+	if Input.is_action_pressed("dodge"):
+		_state_machine.transition_to("Dodge")
 
 	if can_jump:
 		if Input.is_action_just_pressed("jump") and _fighter.is_on_floor():

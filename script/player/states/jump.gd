@@ -1,7 +1,7 @@
 extends PlayerState
 
 var _previous_velocity_y: float
-var _enter_rotation: int
+var _enter_rotation: float
 
 @export var _hitbox: Hitbox
 

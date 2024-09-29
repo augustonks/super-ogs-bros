@@ -4,6 +4,7 @@ extends PlayerState
 @export var _hitbox: Hitbox
 @export var _move_state: PlayerState
 
+var _enter_rotation: int
 var _given_combos := 0
 var _attack_next := false
 var _attack_state: int
@@ -20,23 +21,33 @@ enum attack_states {IDLE_ATTACK, WALK_ATTACK, KICK_AIR}
 
 func enter(_params := []) -> void:
 	super()
+	var attack_type: int
+	if Input.is_action_just_pressed("attack1"):
+		attack_type = 1
+	elif Input.is_action_just_pressed("attack2"):
+		attack_type = 2
+	_enter_rotation = _fighter.current_direction
 	_fighter.rotation_degrees.y = _fighter.current_direction * 90
+
 	if _fighter.is_on_floor():
-		if (abs(_input_axis) > 0 and abs(_fighter.velocity.x) > 7) and _move_state.is_accelerating:
-			_attack_state = attack_states.WALK_ATTACK
-			_walk_attack()
-		else:
+		if attack_type == 1:
 			_attack_state = attack_states.IDLE_ATTACK
 			_idle_attack()
+
+		elif attack_type == 2:
+			if _fighter.is_on_floor():
+				_attack_state = attack_states.WALK_ATTACK
+				_walk_attack()
 	else:
 		_attack_state = attack_states.KICK_AIR
 		_kick_air()
+
 	_hitbox.current_attack_type = attack_states.keys()[_attack_state].to_lower()
 
 
 func physics_process(delta: float) -> void:
 	super(delta)
-	if Input.is_action_just_pressed("attack") and _attack_state == attack_states.IDLE_ATTACK:
+	if Input.is_action_just_pressed("attack1") and _attack_state == attack_states.IDLE_ATTACK:
 		_attack_next = true
 
 	if _attack_state == attack_states.KICK_AIR:
@@ -48,10 +59,13 @@ func physics_process(delta: float) -> void:
 	if _attack_state == attack_states.IDLE_ATTACK:
 		_fighter.velocity.x = move_toward(_fighter.velocity.x, 0, 25 * delta)
 
+	_fighter.current_direction = _enter_rotation
+	
 	_fighter.move_and_slide()
 
 
 func _idle_attack() -> void:
+	_fighter.velocity.y = 0
 	if _fighter.velocity.x != 0:
 		_fighter.velocity.x = _fighter.current_direction * IDLE_PUNCH_IMPULSE
 	match _given_combos:

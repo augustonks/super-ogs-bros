@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://1eylassd1udl"]
+[gd_scene load_steps=12 format=3 uid="uid://1eylassd1udl"]
 
 [ext_resource type="Shader" path="res://assets/shader/outline.gdshader" id="1_bjsgg"]
 [ext_resource type="Script" path="res://script/camera/player_camera.gd" id="2_7nj4w"]
 [ext_resource type="Texture2D" uid="uid://b11w7ajiq2rj" path="res://assets/images/green_plains.jpg" id="3_faw4e"]
 [ext_resource type="PackedScene" uid="uid://corox2g3gguuy" path="res://scene/enemy/enemy.tscn" id="4_o3n8v"]
 [ext_resource type="PackedScene" uid="uid://kux72ucdbcaj" path="res://scene/player/player.tscn" id="4_umlni"]
+[ext_resource type="PackedScene" uid="uid://dtrhusni4ta7y" path="res://scene/ui/debug_info.tscn" id="6_1oadn"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xg1pe"]
 albedo_color = Color(0.22015, 0.327622, 0.384406, 1)
@@ -13,7 +14,7 @@ albedo_color = Color(0.22015, 0.327622, 0.384406, 1)
 albedo_color = Color(0.154089, 0.246087, 0.281292, 1)
 
 [sub_resource type="Environment" id="Environment_ltbvv"]
-background_mode = 2
+background_mode = 3
 sky_rotation = Vector3(0, 3.47495, 0)
 ambient_light_source = 2
 ambient_light_color = Color(0.347073, 0.482548, 0.569626, 1)
@@ -61,10 +62,16 @@ use_collision = true
 size = Vector3(8, 16, 1.59)
 
 [node name="CSGBox3D16" type="CSGBox3D" parent="Blocks"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.8537, -0.421672, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.8537, -2.17317, 0)
 material_override = SubResource("StandardMaterial3D_xg1pe")
 use_collision = true
-size = Vector3(8, 16.503, 1.59)
+size = Vector3(8, 13, 1.59)
+
+[node name="CSGBox3D18" type="CSGBox3D" parent="Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 52.8537, 2.82683, 0)
+material_override = SubResource("StandardMaterial3D_xg1pe")
+use_collision = true
+size = Vector3(68, 7, 1.59)
 
 [node name="CSGBox3D17" type="CSGBox3D" parent="Blocks"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.5399, -6.26769, 0)
@@ -107,11 +114,6 @@ script = ExtResource("2_7nj4w")
 _fighter1 = NodePath("../Player")
 _fighter2 = NodePath("../Enemy")
 
-[node name="Sprite3D" type="Sprite3D" parent="Camera3D"]
-transform = Transform3D(2.75, 0, 0, 0, 2.75, 0, 0, 0, 2.75, 0, -0.298614, -17.9547)
-modulate = Color(0.0928108, 0.556777, 1, 1)
-texture = ExtResource("3_faw4e")
-
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0462523, -0.715235)
 mesh = SubResource("QuadMesh_r7ns7")
@@ -121,4 +123,33 @@ surface_material_override/0 = SubResource("ShaderMaterial_2dj4h")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.29807, -0.0301554, 0)
 
 [node name="Enemy" parent="." instance=ExtResource("4_o3n8v")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.474, 4, 0)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, -0.00497705, 0)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+modulate = Color(0.251878, 0.425725, 0.487273, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -38.0
+offset_top = -15.0
+offset_right = 34.0
+offset_bottom = 26.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_faw4e")
+expand_mode = 1
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="DebugInfo" parent="CanvasLayer" node_paths=PackedStringArray("_player", "_bot") instance=ExtResource("6_1oadn")]
+_player = NodePath("../../Player")
+_bot = NodePath("../../Enemy")

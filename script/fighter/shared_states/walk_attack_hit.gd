@@ -10,3 +10,9 @@ func enter(_params := []) -> void:
 	if not processing:
 		return
 	_state_machine.transition_to(next_state)
+
+
+func physics_process(delta: float) -> void:
+	super(delta)
+	_parent.physics_process(delta)
+	_apply_gravity(delta)

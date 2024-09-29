@@ -220,7 +220,7 @@ _data = {
 "Walkattack": SubResource("Animation_0gvkq")
 }
 
-[node name="Player" groups=["player", "w"] instance=ExtResource("1_vlpdc")]
+[node name="Player" groups=["player"] instance=ExtResource("1_vlpdc")]
 collision_layer = 16
 script = ExtResource("2_oaqfg")
 
@@ -277,40 +277,40 @@ animation_tree = NodePath("../AnimationTree")
 _tracker = NodePath("../Tracker")
 
 [node name="Skeleton3D" parent="Mesh/Armature" index="0"]
-bones/1/position = Vector3(6.10397e-09, 0.429482, 0.00266574)
+bones/1/position = Vector3(2.12381e-09, 0.424361, 0.00266574)
 bones/1/rotation = Quaternion(0.0598809, 1.18995e-07, 7.13835e-09, 0.998206)
 bones/2/rotation = Quaternion(-0.0552952, 4.64506e-14, -1.31834e-08, 0.99847)
 bones/2/scale = Vector3(1, 1, 1)
 bones/3/rotation = Quaternion(-0.0218608, -2.38362e-07, 2.22098e-15, 0.999761)
 bones/4/rotation = Quaternion(-0.044071, -8.93765e-14, 1.05073e-08, 0.999028)
-bones/5/rotation = Quaternion(-0.0065584, 3.22514e-09, -2.30832e-08, 0.999978)
+bones/5/rotation = Quaternion(-0.00877947, 1.11357e-09, -6.41673e-09, 0.999961)
 bones/5/scale = Vector3(1, 1, 1)
 bones/6/rotation = Quaternion(0.0270065, 0.00424482, -0.376636, 0.925958)
-bones/7/rotation = Quaternion(-0.268694, -0.581062, -0.170067, 0.749164)
-bones/8/rotation = Quaternion(0.691956, 9.56403e-05, 0.0531856, 0.719978)
+bones/7/rotation = Quaternion(-0.253488, -0.587415, -0.156481, 0.752463)
+bones/8/rotation = Quaternion(0.671473, 9.81865e-05, 0.0516112, 0.73923)
 bones/9/rotation = Quaternion(0.0270065, -0.00424444, 0.376636, 0.925958)
-bones/10/rotation = Quaternion(-0.268694, 0.581062, 0.170067, 0.749164)
-bones/11/rotation = Quaternion(0.691956, -9.57076e-05, -0.0531854, 0.719978)
-bones/12/position = Vector3(0.44939, 0.561928, -0.0255406)
-bones/12/rotation = Quaternion(-0.0149808, -0.0402426, -0.0991907, 0.994142)
+bones/10/rotation = Quaternion(-0.253488, 0.587415, 0.156481, 0.752463)
+bones/11/rotation = Quaternion(0.671473, -9.82715e-05, -0.0516111, 0.73923)
+bones/12/position = Vector3(0.450255, 0.574189, -0.0251169)
+bones/12/rotation = Quaternion(-0.0145519, -0.0407243, -0.0894436, 0.995053)
 bones/12/scale = Vector3(1, 1, 1)
-bones/14/position = Vector3(-0.44939, 0.561928, -0.0255403)
-bones/14/rotation = Quaternion(-0.0149807, 0.0402428, 0.0991907, 0.994142)
+bones/14/position = Vector3(-0.450255, 0.57419, -0.0251167)
+bones/14/rotation = Quaternion(-0.0145518, 0.0407245, 0.0894436, 0.995053)
 bones/14/scale = Vector3(1, 1, 1)
 bones/15/rotation = Quaternion(-0.000891735, 0.00838936, 0.707106, 0.707057)
-bones/16/position = Vector3(0.142874, 0.5405, 0.0551548)
+bones/16/position = Vector3(0.142687, 0.544659, 0.0534814)
 bones/16/rotation = Quaternion(-0.502695, 0.496892, 0.514357, -0.485626)
-bones/17/position = Vector3(-0.142874, 0.5405, 0.0551549)
+bones/17/position = Vector3(-0.142687, 0.544659, 0.0534815)
 bones/17/rotation = Quaternion(0.502696, 0.496892, 0.514357, 0.485626)
 bones/18/position = Vector3(0.115276, 0.00714147, 0.0126171)
-bones/18/rotation = Quaternion(-0.559954, 0.126982, 0.645589, -0.50353)
+bones/18/rotation = Quaternion(-0.557498, 0.12707, 0.64422, -0.507966)
 bones/18/scale = Vector3(0.999988, 1, 0.999967)
-bones/19/rotation = Quaternion(0.346691, 0.013191, -0.731072, 0.587507)
+bones/19/rotation = Quaternion(0.349028, 0.0130209, -0.736002, 0.579923)
 bones/19/scale = Vector3(0.999999, 1, 1)
 bones/20/position = Vector3(-0.115276, 0.00714159, 0.012617)
-bones/20/rotation = Quaternion(0.559954, 0.126982, 0.645589, 0.50353)
+bones/20/rotation = Quaternion(0.557498, 0.127069, 0.64422, 0.507966)
 bones/20/scale = Vector3(0.999988, 1, 0.999967)
-bones/21/rotation = Quaternion(0.34669, -0.0131909, 0.731073, 0.587507)
+bones/21/rotation = Quaternion(0.349028, -0.0130208, 0.736002, 0.579923)
 bones/21/scale = Vector3(0.999999, 1, 1)
 bones/22/position = Vector3(0.161352, 0.0405048, 0.00846978)
 bones/23/rotation = Quaternion(0.94193, -0.0319537, 0.322367, 0.088467)
@@ -329,13 +329,6 @@ bones/27/rotation = Quaternion(0.279577, 0.649489, 0.64949, 0.279577)
 libraries = {
 "": SubResource("AnimationLibrary_j3dot")
 }
-
-[node name="Debug" type="Label" parent="." index="8"]
-offset_left = 7.0
-offset_top = 8.0
-offset_right = 213.0
-offset_bottom = 92.0
-theme_override_font_sizes/font_size = 26
 
 [editable path="Hitbox"]
 [editable path="Hurtbox"]

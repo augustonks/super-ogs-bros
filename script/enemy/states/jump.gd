@@ -5,6 +5,9 @@ extends FighterBotState
 
 func enter(params := []) -> void:
 	super()
+	
+	if params and params[0]: # De Idle State
+		return
 	if _remaining_jumps > 0:
 		_jump()
 
@@ -21,9 +24,12 @@ func physics_process(delta: float) -> void:
 			_state_machine.transition_to("Move/Idle") 
 	else:
 		_handle_animation()
+		#if _fighter.velocity.y < 0:
+			#if _wall_check.is_colliding():
+				#_state_machine.transition_to("Move/Idle") 
 		if _fighter.velocity.y < 0:
-			if _wall_check.is_colliding():
-				_state_machine.transition_to("Move/Idle") 
+			if _fighter_ai.is_wall_near and _fighter_ai.has_step_up and _remaining_jumps > 0:
+				_jump()
 
 	_parent.handle_movement(delta)
 	_parent.physics_process(delta)

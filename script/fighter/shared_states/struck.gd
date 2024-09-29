@@ -10,6 +10,8 @@ func _ready() -> void:
 
 func enter(params := []) -> void:
 	super()
+	#if owner.name == "Enemy":
+		#print("enemy sturkc")
 	_fighter.velocity = Vector3.ZERO
 	hitbox = params[0]
 	direction = check_hit_direction()

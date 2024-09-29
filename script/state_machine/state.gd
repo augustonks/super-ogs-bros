@@ -13,7 +13,7 @@ func _ready() -> void:
 
 
 func enter(_params := []) -> void:
-	#if owner.name == "Player":
+	#if owner.name == "Enemy":
 		#print(name, " entered!")
 	processing = true
 	if _parent:
